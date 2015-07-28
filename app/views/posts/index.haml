@@ -1,0 +1,45 @@
+.container.posts.user-account-container
+  .row
+    - @posts.order("created_at desc").take(1).each do |p|
+      %article.post.col-sm-12
+        %a{:href=>'/journal/'+p.url_key}
+          %figure
+            %img{:src=> p.featured_image.url, :class =>"img-responsive"}
+          %header
+            %h2= p.title
+            %h3= p.sub_title
+          %p.read-more.fancylink Read More &gt;
+  .row        
+    - @posts.order("created_at desc").drop(1).take(2).each do |p|
+      %article.post.col-sm-6
+        %a{:href=>'/journal/'+p.url_key}
+          %figure
+            %img{:src=> p.featured_image_vert.url(:large), :class =>"img-responsive"}
+          %header
+            %h2= p.title
+            %h3= p.sub_title
+          %p.read-more.fancylink Read More &gt;
+  .row
+    - @posts.order("created_at desc").drop(3).take(1).each do |p|
+      %article.post.col-sm-12
+        %a{:href=>'/journal/'+p.url_key}
+          %figure
+            %img{:src=> p.featured_image.url, :class =>"img-responsive"}
+          %header
+            %h2= p.title
+            %h3= p.sub_title
+          %p.read-more.fancylink Read More &gt;
+  .row        
+    - @posts.order("created_at desc").drop(4).take(2).each do |p|
+      %article.post.col-sm-6
+        %a{:href=>'/journal/'+p.url_key}
+          %figure
+            %img{:src=> p.featured_image_vert.url(:large), :class =>"img-responsive"}
+          %header
+            %h2= p.title
+            %h3= p.sub_title
+          %p.read-more.fancylink Read More &gt;
+
+
+  = paginate @posts
+    

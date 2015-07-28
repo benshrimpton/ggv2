@@ -1,0 +1,39 @@
+.container.user-account-container
+  .row.collection-slideshow.royalSlider.rsDefault#look-book
+    - if @collection.lookbook_images.first.present?
+      - @collection.lookbook_images.each do |img|
+        .row.look-book-slide
+          .title=img.title
+          %img{"src"=>img.lookbook_image.url(:large), class: 'img-responsive img-100'}
+          .col-sm-12.slide-products
+
+            - img.gemgento_product_id.each do |pid|
+              - product = Gemgento::Product.find(pid)
+
+              .col-sm-4.col-xs-6.slide-product
+                = link_to gemgento.product_path(product) do
+                  = product_image_tag product, "image", "medium", :class => "img-responsive img-100"
+                  %h3.mobile-product-name
+                    = product.name
+                  .price
+                    = number_to_currency(product.price, precision: 0)
+
+        .row.look-book-slide
+          .title
+            =img.title_1
+
+          = image_tag img.lookbook_image_1.url(:large), class: 'img-response img-100'
+
+          .col-sm-12.slide-products
+            - img.gemgento_product_id_1.each do |pid|
+              - product = Gemgento::Product.find(pid)
+
+              .col-sm-4.col-xs-6.slide-product
+                = link_to gemgento.product_path(product) do
+                  = product_image_tag product, "image", "medium", class: "img-responsive img-100"
+                  %h3.mobile-product-name
+                    = product.name
+                  .price
+                    = number_to_currency(product.price, precision: 0)
+    - else
+      %h2{ html: "Lookbook not available at this time"}

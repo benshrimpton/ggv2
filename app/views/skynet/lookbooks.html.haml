@@ -1,0 +1,26 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-globe
+        Overview
+    .col-sm-6.text-right
+      %input#product-list-filter.form-control{placeholder: "Search"}
+
+  .row
+    %table.table.table-striped
+      %thead
+        %th
+          Image
+        %th
+          Lookbook Titile
+        %th
+          SKU 
+        %th
+          Magento Id  
+        %th
+          Visibility
+      %tbody#product-list
+        - @lookbooks.each do |lb|
+          %h3= lb.title
+

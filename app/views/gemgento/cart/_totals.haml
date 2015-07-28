@@ -1,0 +1,23 @@
+.form-group.sub-total
+  %span SUBTOTAL
+  %span= number_to_currency(quote.totals[:subtotal], strip_insignificant_zeros: true)
+
+- unless quote.totals[:discounts].empty?
+  - quote.totals[:discounts].each do |code, amount|
+    .form-group.sub-total
+      %span= "DISCOUNT (#{code})"
+      %span= number_to_currency(amount, strip_insignificant_zeros: true)
+
+- if quote.totals[:shipping] > 0
+  .form-group.sub-total
+    %span SHIPPING
+    %span= number_to_currency(quote.totals[:shipping], strip_insignificant_zeros: true)
+
+- if quote.totals[:tax] > 0
+  .form-group.sub-total
+    %span TAX
+    %span= number_to_currency(quote.totals[:tax], strip_insignificant_zeros: true)
+
+.form-group.total
+  %span TOTAL
+  %span= number_to_currency(quote.totals[:total], strip_insignificant_zeros: true)

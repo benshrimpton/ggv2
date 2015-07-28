@@ -1,0 +1,37 @@
+.container.user-account-container
+  .pages-header
+    %nav.user-nav.col-sm-12
+      %h4.checkout-heading SIGN IN
+      %h2.checkout-subheading Sign in below for faster checkout
+      
+  .row
+    .col-md-5.col-xs-12
+      %h4.text-center.form-heading Sign In
+      = form_for @quote, url: checkout_sign_in_path, method: :post do |f|
+        = hidden_field_tag :activity, 'login_user'
+        .checkout-column.col-md-12
+          .form-group
+            = f.label :customer_email, 'Email'
+            = text_field_tag 'email', nil, class: "form-control"
+          .form-group
+            %label{for: 'password'} Password
+            = password_field_tag 'password', nil, class: "form-control"
+          .form-group
+            = submit_tag 'Sign In', class: 'submit btn pull-right half'
+            %small.hidden-xs{class: "pull-right clear"}
+              = link_to 'Forgot my password', new_user_password_path, class: "fancylink"
+
+    .col-xs-12.visible-xs
+      %small.mobile-password
+        = link_to 'Forgot my password', new_user_password_path, class: "fancylink"
+
+    .col-md-5.col-md-offset-2.col-xs-12
+      %h4.text-center.form-heading Guest Checkout
+      = form_for @quote, url: checkout_guest_path, method: :post do |f|
+        = hidden_field_tag :activity, 'login_guest'
+        .checkout-column.col-md-12
+          .form-group
+            = f.label :customer_email, 'Email'
+            = f.text_field :customer_email, class: "form-control"
+          .form-group
+            = submit_tag 'Continue', class: 'submit btn pull-right half'

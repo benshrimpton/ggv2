@@ -1,0 +1,4 @@
+= form_for quote, url: checkout_gift_card_path, method: :post do |f|
+  %label{for: "giftcard_code"} Gift Card Code
+  %input{ type:"text", name: "gift_card_code", id: "gift_card_code", class: "form-control"}
+  %input{ type:"submit", class: "btn", value: "Apply"}

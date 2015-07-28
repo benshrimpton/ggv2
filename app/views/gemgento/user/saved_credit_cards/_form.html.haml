@@ -1,0 +1,53 @@
+#new-address
+  %h4.form-heading.text-center New Address
+
+  = form_for [:user, saved_credit_card] do |f|
+    = f.fields_for :address do |address|
+      .form-group
+        = address.label :first_name
+        = address.text_field :first_name, class: 'form-control'
+      .form-group
+        = address.label :last_name
+        = address.text_field :last_name, class: 'form-control'
+      .form-group
+        = address.label :address1, class: 'form-control'
+        = address.text_field :address1, class: 'form-control'
+        = address.label :address2, class: 'form-control'
+        = address.text_field :address2, class: 'form-control'
+        = address.label 'country_id', 'country'
+        .select-wrapper
+          = address.collection_select 'country_id', pb_countries, :id, :name, {}
+          .down-arrow
+
+      .checkout-column.col-md-5.col-md-offset-2
+        = address.label :city
+        = address.text_field :city
+        - regions = Gemgento::Region.where(country: @saved_credit_card.address.country)
+        = address.label 'region_id', 'State'
+        .select-wrapper
+          = address.collection_select 'region_id', regions, :id, :name, {}, class: 'region-selector'
+          .down-arrow
+        = address.label :zip
+        = address.text_field :postcode
+        = address.label :phone
+        = address.text_field :telephone
+
+    .checkout-row.col-md-8.col-md-offset-2
+      .checkout-column.col-md-5
+        = f.label :cc_type, 'Card Type'
+        = f.select :cc_type, "#{ [%w[Visa VI], ['American Express', 'AE'], %w[MasterCard MC], %w[Discover DI]] }", {class: "form-control"}
+        = f.label :cc_number, 'Card Number'
+        = f.text_field :cc_number
+
+      .checkout-column.col-md-5.col-md-offset-2
+        .row
+          .col-sm-6.col-xs-6
+            = f.label :exp_month, 'EXP. MONTH'
+            = f.select :exp_month, (1..12), {class: "form-control"}
+          .col-sm-6.col-xs-6
+            = f.label :exp_year, 'EXP. YEAR'
+            = f.select :exp_year, ((Time.now.year)..(Time.now.year + 10)), {class: "form-control"}
+
+        = f.label :cc_cid, 'CVV Code'
+        = f.text_field 'cc_cid'
+        = f.submit 'add new card info', class: 'submit'

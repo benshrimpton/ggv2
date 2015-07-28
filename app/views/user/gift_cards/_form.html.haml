@@ -1,0 +1,10 @@
+.row
+  .col-md-8.col-md-offset-2.text-center
+    %p
+      You can claim a gift card by entering the code below.  The value of the gift card will be added to your account and
+      you can choose to use this balance as a payment option at checkout.
+
+    = form_tag '/user/gift_cards', method: :post do
+      .form-group
+        = text_field :gift_card, :code, placeholder: 'Gift Card Code', class: 'form-control'
+      = submit_tag 'Redeem', class: 'btn btn-lg'

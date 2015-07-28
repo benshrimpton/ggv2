@@ -1,0 +1,25 @@
+.row.padded
+
+  %p.text-center
+    Below are all the gift cards claimed on this account.
+    %br/
+    Please view #{link_to 'Order History', gemgento.user_orders_path, class: 'fancy-link'} for purchases made with
+    gift cards
+
+  .col-sm-6 Gift Card Code
+  .col-sm-3 Balance
+  .col-sm-3
+
+- unless gift_cards.empty?
+  - gift_cards.each do |gift_card|
+    .row
+      .col-sm-6
+        %p= gift_card[:giftcard_id]
+      .col-sm-3
+        %p= number_to_currency gift_card[:giftcard_balance].to_f
+      .col-sm-3
+        %p= link_to 'Shop Now', root_path, class: 'fancylink'
+
+- else
+  .col-sm-12.text-center.empty-cart-msg
+    %p You do not have a gift card balance.

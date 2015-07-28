@@ -1,0 +1,62 @@
+%article.container.plp
+  %section.row
+    %header.breadcrumb.clear.col-sm-12
+
+      %span.pull-left
+        %span
+          = link_to "Home", root_path, class: "fancylink"
+          - category_hierarchy(@current_category).each do |category|
+            %span /
+            = link_to category.name.downcase, category_path(category), class: 'fancylink'
+          %span /
+          = link_to @current_category.name, category_path(@current_category), class: 'fancylink'
+         
+      - unless params[:show_all]    
+        %span.pull-right
+          %span.view-all-link
+            = link_to 'View All', category_path(@current_category, show_all: true), class: 'fancylink'
+          %span #{@products.current_page} of #{@products.total_pages}
+      - if params[:show_all]     
+        %span.pull-right
+          %a{href: category_path(@current_category)}
+            %span.glyphicon.glyphicon-th
+
+    %aside.col-md-2.sidebar-left
+      %nav.sidebar-nav
+        = render 'shared/sidebar'
+
+    .col-md-9.product-wrap-outer
+      .col-md-12.product-wrap
+        - unless params[:show_all]
+          = link_to_previous_page @products, 'Previous Page', :class => 'plp-prev-next prev'
+          = link_to_next_page @products, 'Next Page', :class => 'plp-prev-next next'
+
+        .row
+          - if @products.empty?
+            %h2.text-center Products coming soon
+          - @products.each do |product|
+            .col-xs-6.col-sm-6.col-md-6.product
+              .inner
+                .save-for-later
+                  - if current_user && current_user.products.include?(product)
+                    = link_to 'Save For Later', '/user/wishlist'
+                  - else
+                    = link_to 'Save For Later', "/user/wishlist/#{product.id}", method: :post
+                - product.assets.where(store: current_store).take(1).each do |asset, i|
+                  %img{ src: '/assets/product_blank.gif', class: 'img-responsive lazy', "data-size"=> asset.image.image_size, "data-src" =>  asset.image.url(:medium, false) }
+
+                .product-meta
+                  = link_to product do
+                    .table
+                      .table-cell
+                        %div
+                          .product-name-wrap
+                            %h3=product.name
+                          %span.product-price
+                            - if product.on_sale?
+                              %span.original-price
+                                %s= number_to_currency(product.original_price, precision: 0)
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+                            - else
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+= render 'shared/view_all'

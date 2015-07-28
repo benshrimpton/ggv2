@@ -1,0 +1,108 @@
+.logo {
+  background: url('/assets/JR-sprite.png') no-repeat -1px 0px;
+  background-size: 400px 127px;
+  width: 280px;
+  height: 20px;
+  @media(max-width: 320px) {
+    background-size: 374px;
+    width: 260px;
+  }
+}
+
+.logo.white {
+  background-position: 0px -30px;
+}
+
+.search-icon {
+  background: url('/assets/JR-sprite.png') no-repeat -317px -4px;
+  background-size: 400px 127px;
+  width: 12px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.search-icon.grey, .search-icon:hover {
+  background-position: -317px -34px; 
+}
+
+.bag-icon {
+  background: url('/assets/JR-sprite.png') no-repeat -340px 2px;
+  background-size: 400px 127px;
+  width: 16px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.bag-icon.grey, .bag-icon:hover {
+  background-position: -340px -28px;
+}
+
+.up-arrow {
+  background: url('/assets/JR-sprite.png') no-repeat -317px -67px;
+  background-size: 400px 127px;
+  width: 13px;
+  height: 10px;
+}
+
+.down-arrow {
+  background: url('/assets/JR-sprite.png') no-repeat -354px -67px;
+  background-size: 400px 127px;
+  width: 13px;
+  height: 10px;
+}
+
+.zoom-icon {
+  background: url('/assets/JR-sprite.png') no-repeat -258px -60px;
+  background-size: 400px 127px;
+  width: 18px;
+  height: 20px;
+}
+
+.zoom-icon.white {
+  background-position: -223px -61px;
+}
+
+.sm-left-arrow {
+  background: url('imgs/JR-sprite.png') no-repeat -11px -71px;
+  background-size: 400px 127px;
+  width: 5px;
+  height: 10px;
+}
+
+.sm-left-arrow.grey {
+  background-position: -11px -60px;
+}
+
+.sm-right-arrow {
+  background: url('/assets/JR-sprite.png') no-repeat -35px -71px;
+  background-size: 400px 127px;
+  width: 6px;
+  height: 10px;
+}
+
+.sm-right-arrow.grey {
+  background-position: -35px -60px;
+}
+
+.lg-left-arrow {
+  background: url('/assets/JR-sprite.png') no-repeat -61px -60px;
+  background-size: 400px 127px;
+  width: 11px;
+  height: 19px;
+}
+
+.lg-left-arrow.grey, .lg-left-arrow:hover {
+  background-position: -61px -80px;
+}
+
+.lg-right-arrow {
+  background: url('/assets/JR-sprite.png') no-repeat -101px -60px;
+  background-size: 400px 127px;
+  width: 11px;
+  height: 19px;
+}
+
+
+.lg-right-arrow.grey {
+  background-position: -101px -80px;
+}

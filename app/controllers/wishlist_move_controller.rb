@@ -1,0 +1,4 @@
+class WishlistMoveController < ApplicationController
+
+
+end

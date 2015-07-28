@@ -1,0 +1,69 @@
+%article.container.pdp
+  %section.row
+
+    %header.col-md-12.breadcrumb
+      %span.pull-left
+        = link_to "Home", root_path, class: "fancylink"
+        - category_hierarchy(@current_category).each do |category|
+          %span /
+          %span.midddle-cat= link_to category.name.downcase, category_path(category), class: 'fancylink'
+        %span /
+        %a.fancylink{href: "/categories/"+@current_category.url_key}= @current_category.name
+
+    %aside.col-md-2.sidebar-left
+      = render :partial => "shared/sidebar"
+
+    .col-md-10
+      .col-md-12.product-wrap
+        .col-md-7.product-images
+          = render :partial => "shared/pdp_gallery"
+          .clear
+        .col-md-5.product-details
+          .prev-next-wrap
+            .paginator
+              - if previous_product
+                = link_to 'PREV', previous_product, class: 'fancylink prev-product', id: 'prev-product'
+
+              - if previous_product and next_product
+                = ' / '
+
+              - if next_product
+                = link_to 'NEXT', next_product, class: 'fancylink next-product', id: 'next-product'
+
+          .product-meta
+            %h2.product-title= @product.name
+            .product-price
+              - if @product.on_sale?
+                %span.original-price
+                  %s= number_to_currency(@product.original_price.to_i, :precision => 0)
+                %span.current-price= number_to_currency(@product.price.to_i, :precision => 0)
+              - else
+                %span.current-price= number_to_currency(@product.price.to_i, :precision => 0)
+
+            = render partial: 'add_to_bag'
+
+            - if current_user && current_user.products.include?(@product)
+              = link_to 'save for later', '/user/wishlist/', class: 'save-for-later'
+            - else
+              = link_to 'save for later', "/user/wishlist/#{@product.id}", method: :post, class: 'save-for-later'
+
+            .product-description
+              .inner.short-description
+                = @product.short_description
+              .inner.long-description
+                = @product.description
+
+            .product-share
+              %a{ :href => '#', :id => 'product-share'} Share
+              .inner#social-share-wrap
+                = render 'shared/social_share'
+
+      = render partial: 'related_products'
+
+= render 'shared/zoom'
+
+
+
+
+
+

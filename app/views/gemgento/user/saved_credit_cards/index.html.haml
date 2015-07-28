@@ -1,0 +1,29 @@
+.container.user-account-container
+  = render partial: "gemgento/user/account_header"
+  = render partial: 'shared/flash_messages'
+
+  - card_types = { 'VI' => 'Visa', 'AE' => 'American Express', 'MC' => 'MasterCard', 'DI' => 'Discover' }
+  .checkout-container.row
+    - unless @saved_credit_cards.empty?
+      - @saved_credit_cards.each_with_index do |card, i|
+        .row.account-line-item
+          .col-xs-4
+            %p= "#{card.address.first_name} #{card.address.last_name}"
+          .col-xs-4
+            %p= "#{card_types[card.cc_type] || ''}  #{card.cc_number.gsub("X", "*")}"
+          .col-xs-4.text-right
+            %p
+              %span &nbsp;
+              = link_to 'delete', user_saved_credit_card_path(card), confirm: 'Are you sure?', method: :delete, class: "fancylink"
+
+      .row
+        .col-xs-12
+          %p
+            =link_to 'Add New Credit Card', new_user_saved_credit_card_path, class: "add-cc-link link-underlined add-address-link"
+
+    - else
+      .col-md-12.center-text.no-saved-addresses
+        %p You do not have any saved credit cards.
+        %p=link_to 'Add New Credit Card', new_user_saved_credit_card_path, class: "add-cc-link link-underlined add-address-link"
+
+  .row#ajax-form-target

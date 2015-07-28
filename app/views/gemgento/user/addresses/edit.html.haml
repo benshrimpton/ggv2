@@ -1,0 +1,9 @@
+.container.user-account-container
+  = render partial: "gemgento/user/account_header"
+  = render partial: 'shared/flash_messages'
+  = render partial: "shared/error_messages", locals: { model: @address }
+
+  .checkout-row.col-md-8.col-md-offset-2
+    %h4.text-center.form-heading Edit Address
+
+    = render partial: 'form', locals: {address: @address}

@@ -1,0 +1,8 @@
+%menu.social-share
+  %ul
+    %li
+      %a.facebook{:href => "http://www.facebook.com/sharer.php?u="+(request.url), :target => "_blank"} Facebook
+    %li
+      %a.twitter{:href => "http://twitter.com/share?url=#{URI.escape(request.url)}&text=It%20begins%20with%20how%20you%20look%20and%20ends%20with%20how%20you%20feel%20&hashtags=jeffreyrudes", :target => "_blank"} Twitter
+    %li
+      %a.email{:href => 'mailto:?Subject='+@product.name+'&body=Something I like on jeffreyrudes.com. '+(request.url)+'%0D%0A%0D%0A"It begins with how you look and ends with how you feel"- Jeffrey Rüdes', :target => "_blank"} Email

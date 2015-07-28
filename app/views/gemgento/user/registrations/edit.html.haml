@@ -1,0 +1,23 @@
+.container.user-account-container
+  .row
+    = render partial: "gemgento/user/account_header"
+
+    %h4.text-center.form-heading Change Password
+    .devise-reset-password-error
+      = devise_error_messages!
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put}) do |f|
+
+      .col-md-6#new-password
+        .form-group
+          = f.label :password, 'New Password'
+          = f.password_field :password, :class => 'form-control'
+        .form-group
+          = f.label :password_confirmation, 'Confirm New Password'
+          = f.password_field :password_confirmation, :class => 'form-control'
+        .form-group
+          = f.label :current_password, 'Current Password'
+          = f.password_field :current_password, :class => 'form-control'
+        .form-group
+          = f.submit 'save changes', class: 'submit btn pull-right'
+          .cancel
+            = link_to 'cancel', '/user', class: "fancylink"

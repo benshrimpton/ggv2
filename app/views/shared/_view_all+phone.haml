@@ -1,0 +1,4 @@
+- if params[:show_all]
+  -# do nohing?
+- else
+  = link_to 'View All', category_path(@current_category, show_all: true), class: "btn view-all-btn" 

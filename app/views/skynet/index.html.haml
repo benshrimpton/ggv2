@@ -1,0 +1,54 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-globe
+        Overview
+    .col-sm-6.text-right
+      %input#product-list-filter.form-control{placeholder: "Search"}
+
+  .row
+    .col-sm-12
+      .panel.panel-default
+        .panel-heading
+          %h5 Your Site
+        .panel-body
+          .next-card__section.next-card__section--no-padding.next-card__section--bordered.devices
+            .macbook
+              .store-preview-mask
+
+    .col-sm-6
+      .panel
+        .panel-body
+          %table.table.table-striped
+            %thead
+              %th
+                %h4 Newly Added Products
+              %th
+              %th
+            %tbody#product-list
+              - @products.take(5).each do |p|
+                %tr
+                  %td
+                    %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/thumb/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , width: "40"}
+                  %td
+                    = truncate(p.name, :length => 20)
+                  %td
+                    %span.glyphicon.glyphicon-eye-open  
+    .col-sm-6
+      .panel
+        .panel-body
+          %table.table.table-striped
+            %thead
+              %th
+                %h4 Best Selling Products
+              %th
+                SKU
+            %tbody#product-list
+              - @products.take(5).each do |p|
+                %tr
+                  %td
+                    %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/thumb/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , width: "40"}
+                    = truncate(p.name, :length => 20)
+                  %td
+                    =p.sku                

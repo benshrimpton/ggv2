@@ -1,0 +1,33 @@
+.container.user-account-container.search-results-container
+  %section.row.homepage-articles.search-results-row
+    - if (@products.empty?)
+      %h4.account-heading.text-center No results for "#{@query}"
+      %p.text-center
+        Continue
+        %a{href: "/", class: "fancylink"}Shopping
+    - else
+      %h4.account-heading.text-center results for "#{@query}"
+      - @products.each do |product|
+        .col-xs-4.col-sm-4.col-md-4.product
+          .inner
+            .save-for-later
+              - if current_user && current_user.products.include?(product)
+                = link_to 'Save For Later', "/user/wishlist"
+              - else
+                = link_to 'Save For Later', "/user/wishlist/#{product.id}", method: :post
+            - product.assets.where(store: current_store).take(1).each do |asset, i|
+              %img{ src: '/assets/product_blank.gif', class: 'img-responsive lazy', "data-size"=> asset.image.image_size, "data-src" =>  asset.image.url(:medium, false) }
+
+            .product-meta
+              = link_to product do
+                .table
+                  .table-cell
+                    %div
+                      %h3=product.name
+                      %span.product-price
+                        - if product.on_sale?
+                          %span.original-price
+                            %s= number_to_currency(product.original_price, precision: 0)
+                          %span.current-price= number_to_currency(product.price, precision: 0)
+                        - else
+                          %span.current-price= number_to_currency(product.price, precision: 0)

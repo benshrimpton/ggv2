@@ -1,0 +1,33 @@
+development:
+  license_key: centro39
+  combined_shipping_payment: true
+  magento:
+    url: http://magento.stage.jeffreyrudes.com
+    username: gemgento
+    api_key: VM!hJD3R48Bu%m7h
+  extensions:
+    authorize-net-cim-payment-module: true
+  layout: application
+
+beta:
+  license_key: centro39
+  combined_shipping_payment: true
+  magento:
+    url: http://magento.stage.jeffreyrudes.com
+    username: gemgento
+    api_key: VM!hJD3R48Bu%m7h
+  extensions:
+    authorize-net-cim-payment-module: true
+  layout: application
+
+production:
+  license_key: centro39
+  combined_shipping_payment: true
+  magento:
+    url: http://magento.jeffreyrudes.com
+    username: gemgento
+    api_key: VM!hJD3R48Bu%m7h
+    ip_whitelist: 127.0.0.1,104.131.0.40
+  extensions:
+    authorize-net-cim-payment-module: true
+  layout: application

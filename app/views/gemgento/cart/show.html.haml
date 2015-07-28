@@ -1,0 +1,41 @@
+= render partial: 'shared/flash_messages'
+
+.cart-wrap.container#cart
+  .row
+    .col-sm-12
+      .show-on-mobile.cart-total-heading #{@quote.line_items.size} Items
+      %h1.text-center.account-heading MY BAG
+      - if @quote.line_items.size > 0
+        .account-right= link_to 'Checkout', checkout_login_path
+
+  - if @quote.line_items.size > 0
+
+    #shopping-bag.col-sm-12
+      .row.cart-head
+        .col-sm-3 Item
+        .col-sm-3 Description
+        .col-sm-2.text-center Size
+        .col-sm-2.text-center Qty
+        .col-sm-2.text-right Price
+
+
+    .col-sm-12
+      - @quote.line_items.each do |line_item|
+        = render partial: 'line_item', locals: { line_item: line_item }
+
+    .row.cart-footer
+      .col-sm-6
+        -#.form-group= render partial: 'gift_card_form', locals: { quote: @quote }
+        .form-group= render partial: 'coupon_form', locals: { quote: @quote }
+
+      .col-sm-4.col-sm-offset-2.text-right.cart-totals
+        = render partial: 'totals', locals: { quote: @quote }
+
+        .form-group
+          = link_to checkout_login_path do
+            %button.btn.checkout-button CHECKOUT
+
+  - else
+    .col-sm-12.text-center.empty-cart-msg
+      %p.notice.error You have no items in your bag...
+      = link_to 'Back To Shop', "/categories/jackets", class: 'submit btn back-to-shop'

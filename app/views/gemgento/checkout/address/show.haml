@@ -1,0 +1,120 @@
+- @quote.shipping_address.country = Gemgento::Country.find_by(iso2_code: 'us') if @quote.shipping_address.country.nil?
+- @quote.billing_address.country = Gemgento::Country.find_by(iso2_code: 'us') if @quote.billing_address.country.nil?
+
+#checkout.container.text-center.user-account-container
+  %h2.account-heading 1 SHIPPING & BILLING ADDRESSES
+
+  = render partial: 'shared/error_messages', locals: { model: @quote }
+  = form_for @quote, url: checkout_address_path, html: { id: 'checkout-addresses-form' } do |f|
+    .row
+      .col-sm-12
+      = render partial: 'shared/error_messages', locals: { model: @quote.shipping_address }
+      - if current_user
+        - unless current_user.addresses.blank?
+          %h3.account-heading-secondary Select Shipping Address
+          .col-sm-6.col-sm-offset-3.address-list-wrapper
+            .form-group
+              %select.address-list.form-control.select-list#saved-addresses-shipping
+                %option Select Address
+                - current_user.addresses.each do |address|
+                  %option{ value: address.address1, data: { first_name: address.first_name, last_name: address.last_name, address1: address.address1, address2: address.address2, city: address.city, region_id: address.region_id, country_id: address.country_id, postcode: address.postcode, telephone: address.telephone, id: address.id , addressable_id: address.magento_id}}= address.address1+','+address.city+', '+address.postcode
+
+
+
+    /.row.address-form-wrapper{ class: ('open' if current_user && !(@addresses.nil? || @addresses.empty? ))}
+    .row.address-form-wrapper.open
+      %h2.account-heading.col-sm-12 Shipping Address
+      .col-sm-12
+
+        = f.fields_for :shipping_address do |shipping|
+          = shipping.hidden_field :is_shipping
+
+          .col-sm-5
+            .form-group.text-left
+              = shipping.label :first_name
+              = shipping.text_field :first_name, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :last_name
+              = shipping.text_field :last_name, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :address1
+              = shipping.text_field :address1, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :address2
+              = shipping.text_field :address2, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :city
+              = shipping.text_field :city, class: 'form-control'
+
+          .col-sm-5.col-sm-offset-2
+            .form-group.text-left
+              = shipping.label :country_id, 'Country'
+              = shipping.collection_select :country_id, pb_countries, :id, :name, {}, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :region_id, shipping.object.country.iso2_code == 'US' ? 'State' : 'Region'
+              = shipping.collection_select :region_id, shipping.object.country.regions, :id, :name, {}, class: 'region-selector form-control'
+            .form-group.text-left
+              = shipping.label :postcode, shipping.object.country.iso2_code == 'US' ? 'ZIP' : 'Post Code'
+              = shipping.text_field :postcode, class: 'form-control'
+            .form-group.text-left
+              = shipping.label :telephone, 'Phone'
+              = shipping.text_field :telephone, class: 'form-control'
+
+    .row.section
+      = f.check_box :same_as_shipping
+      = f.label :same_as_shipping, 'Billing Address is same as shipping'
+
+    .row#billing-address.address-form-wrapper.open
+      %h2.account-heading.col-sm-12 Billing Address
+
+      - if current_user
+        - unless current_user.addresses.blank?
+          %h3.account-heading-secondary Select Billing Address
+          .col-sm-6.col-sm-offset-3.address-list-wrapper
+            .form-group
+              %select.address-list.form-control.select-list#saved-addresses-billing
+                %option Select Address
+                - current_user.addresses.each do |address|
+                  %option{ value: address.address1, data: { first_name: address.first_name, last_name: address.last_name, address1: address.address1, address2: address.address2, city: address.city, region_id: address.region_id, country_id: address.country_id, postcode: address.postcode, telephone: address.telephone, id: address.id , addressable_id: address.magento_id}}= address.address1+','+address.city+', '+address.postcode
+
+      .col-sm-12
+        = f.fields_for :billing_address do |billing|
+          = billing.hidden_field :is_billing
+
+          .col-sm-5
+            .form-group.text-left
+              = billing.label :first_name
+              = billing.text_field :first_name, placeholder: 'First name', class: 'form-control'
+            .form-group.text-left
+              = billing.label :last_name
+              = billing.text_field :last_name, placeholder: 'Last name', class: 'form-control'
+            .form-group.text-left
+              = billing.label :address1
+              = billing.text_field :address1, placeholder: 'Address 1', class: 'form-control'
+            .form-group.text-left
+              = billing.label :address2
+              = billing.text_field :address2, placeholder: 'Address 2', class: 'form-control'
+            .form-group.text-left
+              = billing.label :city
+              = billing.text_field :city, placeholer: 'City', class: 'form-control'
+
+          .col-sm-5.col-sm-offset-2
+            .form-group.text-left
+              = billing.label :country
+              = billing.collection_select :country_id, pb_countries, :id, :name, {}, class: 'form-control'
+            .form-group.text-left
+              = billing.label :region_id, billing.object.country.iso2_code == 'US' ? 'State' : 'Region'
+              = billing.collection_select :region_id, billing.object.country.regions, :id, :name, {}, class: 'region-selector form-control'
+            .form-group.text-left
+              = billing.label :postcode, billing.object.country.iso2_code == 'US' ? 'ZIP' : 'Post Code'
+              = billing.text_field :postcode, class: 'form-control'
+            .form-group.text-left
+              = billing.label :telephone, 'Phone'
+              = billing.text_field :telephone, class: 'form-control'
+
+    .row
+      .col-sm-4.col-sm-offset-4.text-center
+        .col-sm-12
+          = f.submit 'continue', class: 'submit btn width-100-on-mobile'
+          - if current_user
+            =link_to 'Add New Address', new_user_address_path, class: "fancylink add-nw-address"

@@ -1,0 +1,61 @@
+.container.user-account-container
+  = render partial: "gemgento/user/account_header"
+  = render partial: 'shared/flash_messages'
+  = render partial: "shared/error_messages", locals: { model: @saved_credit_card }
+
+
+  .row.checkout-row#new-cc-form
+    = form_for [:user, @saved_credit_card] do |f|
+      = f.fields_for :address do |address|
+
+        %h4.text-center.form-heading.col-sm-12 New Saved Credit Card
+
+        .checkout-column.col-md-5
+          %h4.form-heading.col-sm-12 Address
+          .form-group
+            = address.label :first_name
+            = address.text_field :first_name, class: 'form-control'
+            = address.label :last_name
+            = address.text_field :last_name, class: 'form-control'
+          .form-group
+            = address.label :address1
+            = address.text_field :address1, class: 'form-control'
+            = address.label :address2
+            = address.text_field :address2, class: 'form-control'
+            = address.label 'country_id', 'country'
+            = address.collection_select 'country_id', Gemgento::Country.all, :id, :name, {}, class: 'form-control'
+            = address.label :city
+            = address.text_field :city, class: 'form-control'
+            - regions = Gemgento::Region.where(country: @saved_credit_card.address.country)
+            = address.label 'region_id', 'State'
+            = address.collection_select 'region_id', regions, :id, :name, {}, class: 'region-selector', class: 'form-control'
+            = address.label :zip
+            = address.text_field :postcode, class: 'form-control'
+            = address.label :phone
+            = address.text_field :telephone, class: 'form-control'
+
+        .checkout-column.col-md-5.col-md-offset-2
+          %h4.form-heading.col-sm-12 Card Info
+          .form-group
+            = f.label :cc_type, 'Card Type'
+            = f.select :cc_type, [%w[Visa VI], ['American Express', 'AE'], %w[MasterCard MC], %w[Discover DI]], {class: "form-control"}
+          .form-group
+            = f.label :cc_number, 'Card Number'
+            = f.text_field :cc_number, class: 'form-control'
+
+          .form-group.add-form-control
+            .col-sm-6.no-padding
+              = f.label :exp_month, 'EXP. MONTH'
+              = f.select :exp_month, (1..12), {class: "form-control"}
+            .col-sm-6.pull-right
+              = f.label :exp_year, 'EXP. YEAR'
+              = f.select :exp_year, ((Time.now.year)..(Time.now.year + 10)), {class: "form-control"}
+            .clear
+              
+          .form-group
+            = f.label :cc_cid, 'CVV Code'
+            = f.text_field 'cc_cid', class: 'form-control'
+
+          .form-group.text-right
+            = link_to 'cancel', "/user/saved_credit_cards", class: "cancel fancylink pull-left"
+            = f.submit 'add new card info', class: 'submit btn pull-right'

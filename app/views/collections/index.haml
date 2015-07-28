@@ -1,0 +1,4 @@
+.container.user-account-container
+  - @collections.each do |c|
+    %a{href: "/collections/"+c.url_key}
+      = c.name

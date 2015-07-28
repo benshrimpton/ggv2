@@ -1,0 +1,13 @@
+%aside.container.related-posts.user-account-container
+  .row
+    .col-sm-12
+      %h3 Read More
+  .row
+    - @related.order("created_at desc").each do |related|
+      %article.col-xs-4
+        %a{:href=>'/journal/'+related.url_key}
+          %figure
+            %img{:src=> related.featured_image_vert.url(:original), :class =>"img-responsive"}
+          %h4=related.title
+          %p=related.sub_title
+          %p.read-more.fancylink Read More &gt;

@@ -1,0 +1,260 @@
+@font-face {
+font-family:'SweetSansPro-Bold';
+src: url('http://www.jeffreyrudes.com/assets/SweetSansPro-Bold_gdi.eot');
+src: url('http://www.jeffreyrudes.com/assets/SweetSansPro-Bold_gdi.eot?#iefix') format('embedded-opentype'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Bold_gdi.woff') format('woff'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Bold_gdi.ttf') format('truetype'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Bold_gdi.svg#SweetSansPro-Bold') format('svg');
+font-weight: 700;
+font-style: normal;
+font-stretch: normal;
+unicode-range: U+0020-25CA;
+}
+
+@font-face {
+font-family:'SweetSansPro-Regular';
+src: url('http://www.jeffreyrudes.com/assets/SweetSansPro-Regular_gdi.eot');
+src: url('http://www.jeffreyrudes.com/assets/SweetSansPro-Regular_gdi.eot?#iefix') format('embedded-opentype'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Regular_gdi.woff') format('woff'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Regular_gdi.ttf') format('truetype'),
+url('http://www.jeffreyrudes.com/assets/SweetSansPro-Regular_gdi.svg#SweetSansPro-Regular') format('svg');
+font-weight: 400;
+font-style: normal;
+font-stretch: normal;
+unicode-range: U+0020-25CA;
+}
+body * {
+margin: 0;
+padding: 0;
+font-family:'SweetSansPro-Regular', Arial, Avenir, sans-serif;
+}
+table, tr, td {
+margin: 0;
+padding: 0;
+}
+body#mailer {
+font-family: Arial;
+font-size: 14px;
+font-family:'SweetSansPro-Regular', Arial, Avenir, sans-serif;
+letter-spacing: 1px;
+width: 600px;
+margin: 0 auto;
+}
+.logo {
+a {
+   margin-bottom: 50px;
+   display: block;
+ }
+}
+.thank-you {
+margin-bottom: 40px;
+}
+.bold {
+font-family:'SweetSansPro-Bold', Arial, Avenir, sans-serif;
+font-weight: bold;
+letter-spacing: 1px;
+}
+#emailContainer {
+width: 100%;
+font-size: 16px;
+}
+.text-center {
+text-align: center;
+}
+.text-left {
+text-align: left;
+}
+.text-right{
+text-align: right;
+}
+
+p { font-size: 14px; font-family:'SweetSansPro-Regular',Arial, Avenir, sans-serif; }
+
+.shot {margin: 6% 0;}
+
+a { color: #000; text-decoration: underline; }
+
+h6 { font-size: 20px; }
+
+.spacer {
+display: block;
+height: 40px;
+min-height: 40px;
+}
+.divider {
+height: 40px;
+border-bottom: solid 1px silver;
+margin-bottom: 20px;
+}
+.divider-no-height {
+  height: 1px;
+  border-bottom: solid 1px silver;
+  margin-bottom: 20px;
+}
+
+/* ######## ORDER EMAIL ######## */
+.order-table {
+
+}
+.heading {
+  font-family:'SweetSansPro-Bold',Arial, Avenir, sans-serif;
+}
+.heading-light {
+  font-family:'SweetSansPro-Regular', Arial, Avenir, sans-serif;
+  font-weight: normal;
+}
+.heading-small {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.text-left {
+text-align: left;
+}
+.produt-name {
+font-family:'SweetSansPro-Bold', Arial, Avenir, sans-serif;
+font-size: 15px !important;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+
+
+p {
+font-size: 12px;
+font-family:'SweetSansPro-Regular',Arial, Avenir, sans-serif; 
+a {
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: gray;
+  }
+}
+}
+
+.heading {
+font-weight: normal;
+}
+
+
+.order-number  {
+text-transform: uppercase;
+font-family:'SweetSansPro-Regular',Arial, Avenir, sans-serif; 
+margin-bottom: 20px;
+font-size: 15px;
+}
+.purchase-items {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px #ddd;
+}
+.line-item-row  {
+min-height: 100px;
+padding-bottom: 0px;
+}
+.line-item-row.address {
+  padding-bottom: 40px;
+}
+
+
+.left {
+float: left;
+width: 49%;
+ img {
+  width: 160px;
+  display: block;
+  margin: 0 auto;
+ }
+}
+
+
+.right {
+float: right;
+width: 49%;
+
+}
+
+.left,
+.right {
+  p {
+    font-size: 13px;
+  }
+}
+
+.address .left,
+.address .right {
+  p {
+    font-size: 12px;
+  }
+}
+
+
+.clear {
+clear: both;
+height: 50px;
+}
+
+.order-confirmation-text {
+text-align: left;
+margin-bottom: 30px;
+letter-spacing: 2px;
+  a {
+  color: black;
+  text-decoration: none;
+  }
+}
+.social-footer {
+vertical-align: top;
+padding-top: 30px;
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}
+.email-footer {
+padding-bottom:30px;
+  a {
+    text-decoration: none; margin: 0 5px; font-size: 10px; font-weight: bold;
+  }
+}
+.footer-totals  {
+  text-transform: uppercase;
+  .div{
+    padding-top: 20px;
+  }
+  p {
+    padding:  5px 0;
+    font-size: 13px;
+    }
+}
+.instagram-link {
+  color: black; text-decoration: underline; margin-right: 20px;
+}
+
+/* ####### ACCOUNT NOTIFICATIONS ####### */
+.start-shopping-btn {
+  display: inline-block;
+  color: white;
+  background: #545255;
+  padding: 15px 30px;
+  margin: 0 auto 50px auto;
+  letter-spacing: 2px;
+}
+
+.total-wrap{
+  width: 50%;
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.clear {
+  clear: both;
+}
+.no-border {
+  border: none;
+}

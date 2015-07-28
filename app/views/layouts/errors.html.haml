@@ -1,0 +1,79 @@
+!!!
+/[if IE 8] <html class="no-js lt-ie9">
+/ [if gt IE 8] 
+%html.no-js
+  / <![endif]
+  %head
+    = canonical_tag
+    - if @page_meta.present? && @page_meta.title.present?
+      %title= @page_meta.title      
+    - else  
+      %title Jeffrey Rüdes
+    %meta{charset: "UTF-8"}
+    - if !@page_meta.nil? && !@page_meta.description.blank?
+      %meta{name: "description", content: "#{@page_meta.description}"}    
+    - else    
+      %meta{name: 'description', content:'Jeffrey Rüdes.  Menswear Made in Italy.'}
+    %meta{property: 'og:title', content:'Jeffrey Rüdes'}
+    %meta{property: 'og:site_name', content:'Jeffrey Rüdes'}
+    %meta{property: 'og:url', content: "https://www.jeffreyrudes.com"}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes'}
+    %link{href: '/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'}
+    %link{href: '/favicon.ico', rel: 'icon', type: 'image/x-icon'}
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body{class: ('home' if @home_images.present?)}
+    .site-wrapper
+      = render 'shared/navigation'
+      %main.main
+        = yield
+    = render 'shared/footer'
+
+    = include_rails_script
+
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59913216-1', 'jeffreyrudes.com');
+      ga('send', 'pageview');
+
+    // GOOGLE REMARKETING TAG 
+    :javascript
+      /* REMARKETING TAG */
+      var google_conversion_id = 947688599;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+    %script{:src => "//www.googleadservices.com/pagead/conversion.js", :type => "text/javascript"}
+    %noscript
+      %div{:style => "display:inline;"}
+        %img{:alt => "", :height => "1", :src => "//googleads.g.doubleclick.net/pagead/viewthroughconversion/947688599/?value=0&amp;guid=ON&amp;script=0", :style => "border-style:none;", :width => "1"}/ 
+
+
+    :javascript
+      /* FB PIXEL */
+      (function() {
+      var _fbq = window._fbq || (window._fbq = []);
+      if (!_fbq.loaded) {
+      var fbds = document.createElement('script');
+      fbds.async = true;
+      fbds.src = '//connect.facebook.net/en_US/fbds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(fbds, s);
+      _fbq.loaded = true;
+      }
+      })();
+      window._fbq = window._fbq || [];
+      window._fbq.push(['track', '6024089505234', {'value':'0.00','currency':'USD'}]);
+    %noscript
+      %img{:alt => "", :height => "1", :src => "https://www.facebook.com/tr?ev=6024089505234&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1", :style => "display:none", :width => "1"}/
+
+
+    - if Rails.env.production?
+      :javascript
+        GoogleAnalytics.load() 
+

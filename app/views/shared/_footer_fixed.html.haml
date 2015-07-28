@@ -1,0 +1,40 @@
+%footer.container.footer#main-footer.home-fixed.ben
+  .row.footer-nav
+    .col-md-12
+      %ul
+        %li= link_to 'Subscribe', '#', id: 'subscribe-trigger', class: 'fancylink'
+
+        - Page.all.each do |page|
+          %li= link_to page.link_text, "/#{page.url_key}", class: 'fancylink'
+
+        -#%li= link_to 'Gift Cards', main_app.gift_card_path
+
+    .col-md-2
+  .row.bottom-info
+    .col-md-12.text-center.copyright-wrap
+      %ul
+        %li
+          %span ©
+          %span.hide-on-mobile-phone copyright
+          %span JEFFREY RUDES #{Date.today.year}
+
+        %li.credit
+          = link_to 'http://maui.nyc', target: 'blank', class: 'site-credit' do
+            SITE CREDIT
+
+#subscribe-modal.subscribe-modal-outer
+  .table
+    .table-cell
+      .subscribe-modal-inner
+        %a.subscribe-modal-close{:href => "#"} &times;
+        %h3.subscribe-modal-logo Jeffrey Rudes
+        .subscribe-modal-notice
+          Sign up to receive exclusive news from Jeffrey Rüdes.
+        .subscribe-modal-form
+          = form_for Gemgento::Subscriber.new, url: gemgento.subscribers_path, id: 'subscribe-form form-modal' do |f|
+            = f.text_field :first_name, placeholder: 'First Name'
+            = f.text_field :last_name, placeholder: 'Last Name'
+            = f.text_field :zip_code, placeholder: 'ZIP Code'
+            = f.email_field :email, placeholder: 'Email'
+            .clear.text-center
+            = f.submit 'SUBSCRIBE'

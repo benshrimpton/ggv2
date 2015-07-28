@@ -1,0 +1,30 @@
+.container.user-account-container
+  = render partial: "gemgento/user/account_header"
+  /= render partial: 'shared/flash_messages'
+
+  - unless @addresses.blank?
+    - @addresses.each_with_index do |address, i|
+
+      .row.account-line-item
+        .col-xs-8
+          %p= truncate("#{address.first_name} #{address.last_name} #{address.address1} #{address.city}, #{address.region.code} #{address.postcode}", length: 80)
+
+        .col-xs-4.text-right
+          %p
+            = link_to 'edit', edit_user_address_path(address),class: "fancylink"
+            %span &nbsp;
+            %span &nbsp;
+            = link_to 'delete', user_address_path(address), confirm: 'Are you sure?', method: :delete,class: "fancylink"
+
+    .row
+      .col-xs-12
+        %p
+          =link_to 'Add New Address', new_user_address_path, class: "add-address-link link-underlined"
+  - else
+    .row
+      .col-md-12.no-saved-addresses
+        %p
+          =link_to 'Add New Address', new_user_address_path, class: "add-address-link link-underlined"
+
+
+  .row#ajax-address-target

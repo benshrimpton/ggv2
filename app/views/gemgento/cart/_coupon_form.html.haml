@@ -1,0 +1,4 @@
+= form_for quote, url: checkout_coupons_path, method: :post do |f|
+  %label.foo{for: 'coupon_code'} Discount Code
+  %input#coupon_code.form-control{ type: 'text', name: 'code' }
+  = f.submit 'Apply', class: 'btn'

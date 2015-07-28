@@ -1,0 +1,16 @@
+.container.user-account-container
+  .row.cart-item-row
+    = render partial: "gemgento/user/account_header"
+    .col-sm-4
+      %p= "#{current_user.first_name} #{current_user.last_name}"
+
+    .col-sm-4
+      %p= "#{current_user.email}"
+    .col-sm-4.text-right
+      %p= link_to "Edit", "/user/edit", class: "fancylink"
+  .row
+    .col-sm-12
+      %p= link_to "Change Password", "/user/edit", class: "link-underlined change-password-link"
+
+
+  .row.ajax-content

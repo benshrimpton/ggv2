@@ -1,0 +1,27 @@
+.row.order-heading
+  .col-sm-2 Order Date
+  .col-sm-2 Order #
+  .col-sm-3 Sent to
+  .col-sm-5 Staus
+
+- unless @orders.empty?
+  - @orders.each_with_index do |order, index|
+    .row.order-row
+      .col-sm-2
+        %p= (order.placed_at.nil? ? order.created_at : order.placed_at).strftime('%F')
+      .col-sm-2
+        %p= order.increment_id
+      .col-sm-3
+        %span.order-address
+          %p= order.shipping_address.address1+'...'
+      .col-sm-5
+        %span.pull-left
+          %p= order.status
+        %span.pull-right
+          %p
+            %a{href: "/user/orders/"+order.increment_id, class: 'fancylink order-ajax'} Order Details
+- else
+  .col-sm-12.text-center.empty-cart-msg
+    %p You haven't placed any orders yet
+    %p
+      =link_to 'START SHOPPING', '/', class: 'add-address-link fancylink'

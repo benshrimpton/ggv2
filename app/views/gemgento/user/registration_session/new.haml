@@ -1,0 +1,47 @@
+.container.user-account-container.login
+
+  = render partial: "gemgento/user/account_header"
+
+  .col-sm-12.remove-padding-on-mobile
+    .col-md-5.account-sign-in-wrapper
+      %h4.text-center.form-heading Sign In
+      = form_for(@existing_user, url: user_login_path, html: { method: :post }) do |f|
+        .checkout-column.col-md-12
+          .form-group
+            = hidden_field_tag :activity, 'sign_in'
+            = f.label :name, 'Email'
+            = f.text_field 'email', class: "form-control"
+          .form-group
+            = f.label :password, 'Password'
+            = f.password_field 'password', class: "form-control"
+          .action-link.form-group.pull-right.col-sm-7.no-padding.width-100-on-mobile
+            = f.submit 'Sign In'  , class: "btn width-100"
+            .clear
+            %p= link_to 'Forgot my password', new_user_password_path, class: "fancylink"
+
+    .col-md-5.col-md-offset-2.account-sign-up-wrapper
+      %h4.text-center.form-heading Create an Account
+      = form_for(@new_user, url: user_login_path, html: { method: :post })  do |f|
+        .checkout-column.col-md-12
+          .form-group
+            = hidden_field_tag :activity, 'register'
+            = f.label :first_name, 'First Name'
+            = f.text_field 'first_name', class: "form-control"
+          .form-group
+            = f.label :last_name, 'Last Name'
+            = f.text_field 'last_name', class: "form-control"
+          .form-group
+            = f.label :email, 'Email'
+            = f.text_field 'email', class: "form-control"
+          / .checkbox
+          /   = check_box_tag :subscribe, true, params[:subscribe], checked: true
+          /   = label_tag :subscribe, '', class: "checkbox-x", style: "display: block;"
+          / = label_tag :subscribe, "subscribe to Jeffrey Rudes newsletter"
+          .form-group
+            = f.label :password, 'Password'
+            = f.password_field 'password', class: "form-control"
+          .form-group
+            = f.label :password, 'Re-type Password'
+            = f.password_field 'password_confirmation', class: "form-control"
+          .form-group
+            = f.submit 'Create an Account', class: 'submit btn pull-right width-100-on-mobile'

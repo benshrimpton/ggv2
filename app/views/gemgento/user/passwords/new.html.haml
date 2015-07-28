@@ -1,0 +1,19 @@
+.container.user-account-container
+  = render partial: "gemgento/user/account_header"
+  .row
+    .col-md-6.col-md-offset-3
+      %h4.text-center.form-heading Forgot Your Password?
+      %p.forgot-password-message Enter your email below and we will send you an email to reset your password.
+
+      = devise_error_messages!
+
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        .checkout-column.forgot-password
+          .form-group
+            = f.label :email, 'email address'
+            = f.text_field :email, :autofocus => true, class: "form-control"
+          .form-group
+            = submit_tag 'SEND', class: 'submit btn pull-right'
+
+          .cancel.form-group
+            = link_to 'cancel', '/user/login'

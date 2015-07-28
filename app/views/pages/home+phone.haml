@@ -1,0 +1,3 @@
+.mobile-image-home
+  - if @cover_image.present?
+    %img{src: @cover_image.image_mobile.url(:large), id: "home-image-2", class: "mobile-home-image img-responsive"}

@@ -1,0 +1,49 @@
+%menu.mini-cart-wrapper
+  %header.mini-cart-header
+    %span Bag (#{current_quote.item_quantity.to_i})
+    %span
+      = link_to 'Checkout', gemgento.cart_path
+  %section.mini-cart-inner{ class: ('no-items' if current_quote.line_items.size <= 0)}
+
+    - if current_quote.line_items.empty?
+      .empty-mini-cart-message
+        %h2 YOUR BAG IS EMPTY
+
+    - current_quote.line_items.each do |line_item|
+      = link_to gemgento.product_path(linkable_product(line_item.product)) do
+        .mini-cart-item
+          %figure.mini-cart-thumb
+            = image_tag line_item_image_tag(line_item)
+
+          .mini-cart-item-data
+            %h4= line_item.product.name
+
+            .mini-cart-item-metaline_item
+              %span
+                - if product_on_sale?(line_item.product, line_item.qty_ordered)
+                  %span.original-price
+                    %s= number_to_currency(line_item.product.original_price)
+
+                %span.current-price
+                  = number_to_currency(line_item.price, strip_insignificant_zeros: true)
+
+              %span.size
+                %span Size:
+                %span= product_size(line_item.product)
+
+            .mini-cart-item-qty
+              %span QTY: #{line_item.qty_ordered.to_i}
+
+        .clear
+
+  %footer.min-cart-footer
+    %span.mini-cart-total
+      %b Subtotal:
+
+      - if current_quote.line_items.any?
+        %b= number_to_currency(current_quote.subtotal)
+      - else
+        %b $00
+
+    %span.mini-cart-checkout-btn
+      = link_to 'Checkout', gemgento.cart_path

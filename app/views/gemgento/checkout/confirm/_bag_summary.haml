@@ -1,0 +1,38 @@
+%section.checkout-summary-cart
+  %header
+    %h2.account-heading-secondary Bag (#{current_quote.item_quantity.to_i})
+  %section
+    - current_quote.line_items.each do |line_item|
+      %section.row.cart-item
+        %figure
+          =link_to line_item.product do
+            = image_tag line_item_image_tag(line_item)
+        .cart-item-meta
+          %h4
+            =link_to line_item.product do
+              = line_item.product.name
+          %p= line_item.product.short_description
+          %span.pull-left
+            %p
+              -if line_item.product.size
+                Size: #{line_item.product.size}
+              -if line_item.product.denim  
+                Size: #{line_item.product.denim}  
+              -if line_item.product.jacket  
+                Size: #{line_item.product.jacket} 
+              -if line_item.product.knits  
+                Size: #{line_item.product.knits} 
+              -if line_item.product.leather  
+                Size: #{line_item.product.leather} 
+              -if line_item.product.overcoats  
+                Size: #{line_item.product.overcoats} 
+              -if line_item.product.ties  
+                Size: #{line_item.product.ties} 
+              -if line_item.product.scarves  
+                Size: #{line_item.product.scarves}  
+              -if line_item.product.shirts  
+                Size: #{line_item.product.shirts}  
+          %span.pull-right
+            %p
+              Qty: #{line_item.qty_ordered.to_i}
+          .clear

@@ -1,0 +1,18 @@
+%section.container.single-post.user-account-container
+  .row
+    %article.col-sm-12.post
+      - if @post.journalimages.any?
+        %figure#journal-slidehow.royalSlider.rsDefault
+          - @post.journalimages.each do |img|
+            %a{href: img.journal_image.url , class: "rsImg"}
+      - else
+        %figure
+          %img{:src=> @post.featured_image.url, :class =>"img-responsive"}
+      %header
+        %h2= @post.title
+        %h3= @post.sub_title
+        %span.post-author
+          %p By #{@post.author}
+      .post-body= raw @post.body
+
+  -#= render partial: 'related_content'

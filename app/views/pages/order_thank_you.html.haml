@@ -1,0 +1,39 @@
+.container.text-center.user-account-container.order-thank-you
+  .row
+    %section.col-sm-6.col-sm-offset-3
+      %h2.account-heading-secondary Thank you for your order
+
+      %p
+        %span You will receive a confirmation email shortly.
+        - if current_user
+          %span
+            %a.back-to-shop{href:"/"}Back To Shop
+        - if !current_user
+          %span Save time during checkout by creating an account below.
+
+  - if !current_user
+    .row
+      %section.col-sm-10.col-sm-offset-1.order-thank-you-create-account
+        .col-sm-12
+          %h2.account-heading-secondary.text-center Create an Account
+
+          .col-sm-6
+            .form-group.text-left
+              %label Password
+              %input{type:"text", class: "form-control"}
+              -#= f.label :create_password, 'Password'
+              -# f.password_field :password, class: 'form-control'
+          .col-sm-6
+            .form-group.text-left
+              %label Retype password
+              %input{type:"text", class: "form-control"}
+              %input{type:"submit", class: "btn pull-right submit"}
+              
+              -#= f.label :password_confirmation, ' Retype password'
+              -#= f.password_field :password_confirmation, class: 'form-control'
+              -#= f.submit 'create account', class: 'btn pull-right'
+
+  %figure.thank-you-image.clear.text-center.row
+    .col-sm-12
+      %img{src:"/assets/checkout-thank-you.jpg", class: "img-responsive"}    
+

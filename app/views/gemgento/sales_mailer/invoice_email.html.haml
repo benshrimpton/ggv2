@@ -1,0 +1,77 @@
+%tr.text-left
+  %td
+    .div.text-center
+      %h6.heading-light.thank-you Thank you
+    %p.order-confirmation-text
+      We've received your order and will get started on it right away. You can expect to receive a shipping confirmation email with a link to track your order. You can check the status of your order by logging into your account. If you have any questions about your order, please contact shop@jeffreyrudes.com or by phone at 415.399.9939, Monday through Friday from 9.30am to 5.00pm EST. Thank you for shopping at jeffreyrudes.com
+
+%tr
+  %td.text-left
+    %p.order-number.bold ORDER #{@order.increment_id} (placed on  #{@order.placed_at.strftime '%-m/%d/%Y'})
+    %p.purchase-items.bold PURCHASED ITEMS
+
+  - @order.line_items.each do |o|
+    - p = o.product
+    - c = o.product.configurable_products.first     
+    %tr.text-left.item
+      %td
+        .line-item-row  
+          .left
+            = image_tag (p.configurable_products.any? ? p.configurable_products.first.assets.first.image.url(:thumb) : p.assets.first.image.url(:thumb)), class: 'img-responsive'
+          .right
+            %p.heading.bold.produt-name #{o.name}
+            %p QTY #{o.qty_ordered.to_i}
+            - unless p.attribute_value('size').nil?
+              %p SIZE #{p.attribute_value('size')}
+            %p TOTAL #{number_to_currency(o.price, strip_insignificant_zeros: true)}
+          .clear
+%tr
+  %td
+    .divider-no-height
+    
+%tr
+  %td.text-left
+    .line-item-row.address  
+      .left
+        .title.heading.heading-small Billing information
+        %p #{@order.billing_address.first_name}
+        %p #{@order.billing_address.last_name} 
+        %p #{ @order.billing_address.street}
+        %p #{@order.billing_address.city}
+        %p #{@order.billing_address.region.name}, #{@order.billing_address.postcode}
+      .right
+        .title.heading.heading-small Shipping information
+        %p #{@order.shipping_address.first_name}
+        %p #{@order.shipping_address.last_name} 
+        %p #{@order.shipping_address.street}
+        %p #{@order.shipping_address.city}
+        %p #{@order.shipping_address.region.name}, #{@order.shipping_address.postcode}
+
+%tr
+  %td.text-left
+    .title.heading.heading-small Payment method
+    %p= @order.payment.cc_owner
+    %p= "********#{@order.payment.cc_last4}"  
+    %p= "EXP: #{@order.payment.cc_exp_month}/#{@order.payment.cc_exp_year}"
+
+%tr
+  %td
+    .divider
+
+%tr
+  %td.text-right.footer-totals
+    .div
+      %p subtotal #{number_to_currency @order.subtotal}
+      %p shipping #{number_to_currency @order.shipping_amount}
+      %p tax #{number_to_currency @order.tax_amount}
+      %p total #{number_to_currency @order.grand_total}
+
+%tr
+  %td
+    .divider      
+
+/ %tr
+/   %td.text-center 
+/     =link_to 'contact', '/contact'
+/     =link_to 'gift card', '/gift-card'
+/     =link_to 'customer service', '/customer-service'  

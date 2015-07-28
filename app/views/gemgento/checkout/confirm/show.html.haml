@@ -1,0 +1,94 @@
+#checkout.container.text-center.user-account-container.order-confirm
+
+  %header.row
+    %h2.account-heading 3 ORDER CONFIRMATION
+    = render partial: 'shared/error_messages', locals: { model: @quote }
+  .row
+    .col-sm-5.text-left
+      = render partial: 'bag_summary', locals: {quote: @quote}
+
+    .col-sm-7.text-left
+      = form_for @quote, url: checkout_confirm_path, html: { id: 'checkout_confirm_method' } do |form|
+        .col-sm-6
+          %section
+            %h2.account-heading-secondary Shipping
+            %h3.account-heading-secondary Shipping Address
+            %p= @quote.shipping_address.first_name + " " + @quote.shipping_address.last_name
+            %p= @quote.customer_email
+            %p= @quote.shipping_address.telephone
+            %p= @quote.shipping_address.address1
+            %p= @quote.shipping_address.address2
+            %p= "#{@quote.shipping_address.region.name}," if @quote.shipping_address.region
+            %p= "#{@quote.shipping_address.city} #{@quote.shipping_address.postcode}"
+            %p= "#{@quote.shipping_address.country.name}" if @quote.shipping_address.country
+            %p.pull-right
+              = link_to 'Edit', checkout_address_path, class: 'fancylink'
+
+          %section
+            %h3.account-heading-secondary Shipping Method
+            %p= @shipping_method[:carrier_title]
+            %p.pull-right
+              = link_to 'Edit', checkout_shipping_payment_path, class: 'fancylink'
+
+
+
+
+
+
+          %section.order-overview-items
+            %h2.account-heading-secondary Payment
+            %h3.account-heading-secondary Billing Address
+            %p= @quote.billing_address.first_name + " " + @quote.billing_address.last_name
+            %p= @quote.billing_address.address1
+            %p= @quote.billing_address.address2
+            %p= "#{@quote.billing_address.region.name}, " if @quote.billing_address.region
+            %p= "#{@quote.billing_address.city} #{@quote.billing_address.postcode}"
+            %p= "#{@quote.billing_address.country.name}" if @quote.billing_address.country
+            %p= @quote.billing_address.telephone
+            %p= @quote.customer_email
+            %p.pull-right
+              = link_to 'Edit', checkout_address_path, class: 'fancylink'
+
+          %section
+            / We cant seem to get a CC name, so we hard code the names based on the number.
+            %h3.account-heading-secondary Payment
+            - cards = { '1' => 'Visa', '2' => 'American Express', '3' => 'Mastercard', '122' => 'Visa Electron' }
+            %p #{@quote.payment.cc_owner}
+            %p #{cards[@quote.payment.cc_type.to_s]}: **** **** **** #{@quote.payment.cc_last4}
+            %p EXP. #{@quote.payment.cc_exp_month} / #{@quote.payment.cc_exp_year}
+            %p.pull-right
+              = link_to 'Edit', checkout_shipping_payment_path, class: 'fancylink'
+
+        .col-sm-6.order-confirm-totals
+          %section
+            %span.pull-left
+              %p SUBTOTAL
+            %span.pull-right
+              %p= number_to_currency(@quote.totals[:subtotal])
+            .clear
+
+            - unless @quote.totals[:discounts].empty?
+              - @quote.totals[:discounts].each do |code, amount|
+                %span.pull-left
+                  %p DISCOUNT (#{code})
+                %span.pull-right
+                  %p= number_to_currency(amount)
+                .clear
+
+            %span.pull-left
+              %p SHIPPING
+            %span.pull-right
+              %p= number_to_currency(@quote.totals[:shipping])
+            .clear
+            %span.pull-left
+              %p TAX
+            %spa.pull-right
+              %p= "#{number_to_currency(@quote.totals[:tax])}"
+            .clear
+            %span.pull-left
+              %p TOTAL
+            %span.pull-right
+              %p= number_to_currency(@quote.totals[:total])
+
+          %section
+            = submit_tag 'PLACE ORDER', class:"btn place-order btn-dark"

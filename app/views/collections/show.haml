@@ -1,0 +1,62 @@
+.container.user-account-container
+  .row.collection-slideshow.royalSlider.rsDefault#look-book
+    - if @collection.lookbook_images.first.present?
+      - @collection.lookbook_images.each_with_index do |img, i|
+        .row.look-book-slide
+          .col-sm-6.look-book-slide-wrap{data: {ref: "index-#{i+1}-left"}}
+            .title=img.title
+            %img{"src"=>img.lookbook_image.url(:large), class: 'img-responsive img-100'}
+            .desc.first_lb{type: 'first_lb'}
+              - img.gemgento_product_id.each do |pid|
+                - product = Gemgento::Product.find(pid)
+                .product_name
+                  = product.name
+
+          .col-sm-6.text-right.look-book-slide-wrap{data: {ref: "index-#{i+1}-right"}}
+            .title=img.title_1
+            %img{"src"=>img.lookbook_image_1.url(:large), class: 'img-responsive img-100'}
+            .desc.second_lb{type: 'second_lb'}
+              - img.gemgento_product_id_1.each do |pid|
+                - product = Gemgento::Product.find(pid)
+                .product_name
+                  = product.name
+
+          .col-sm-12.slide-products.first_lb_products{id: "index-#{i+1}-left"}
+            - img.gemgento_product_id.each do |pid|
+              - product = Gemgento::Product.find(pid)
+              .col-sm-4.slide-product
+                = link_to gemgento.product_path(product) do
+                  = product_image_tag product, "image", "medium", :class => "img-responsive img-100"
+                  .product-meta
+                    .product-detail
+                      .table
+                        .table-cell
+                          %h3=product.name
+                          %span.product-price
+                            - if product.on_sale?
+                              %span.original-price
+                                %s= number_to_currency(product.original_price, precision: 0)
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+                            - else
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+
+          .col-sm-12.slide-products.second_lb_products{id: "index-#{i+1}-right"}
+            - img.gemgento_product_id_1.each do |pid|
+              - product = Gemgento::Product.find(pid)
+              .col-sm-4.slide-product
+                = link_to gemgento.product_path(product) do
+                  = product_image_tag product, "image", "medium", :class => "img-responsive img-100"
+                  .product-meta
+                    .product-detail
+                      .table
+                        .table-cell
+                          %h3=product.name
+                          %span.product-price
+                            - if product.on_sale?
+                              %span.original-price
+                                %s= number_to_currency(product.original_price, precision: 0)
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+                            - else
+                              %span.current-price= number_to_currency(product.price, precision: 0)
+    - else
+      %h2{ html: "Lookbook not available at this time"}

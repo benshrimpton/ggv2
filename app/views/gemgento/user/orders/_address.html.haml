@@ -1,0 +1,10 @@
+= "#{address.first_name} #{address.last_name}"
+%br
+= address.address1
+%br
+- unless address.address2.blank?
+  = address.address2
+  %br
+= "#{address.city}, #{address.region.code} #{address.postcode}"
+%br
+= address.telephone

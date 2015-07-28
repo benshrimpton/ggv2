@@ -1,0 +1,74 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-folder-open
+        Settings
+    .col-sm-6.text-right
+      %a{class: "btn btn-primary btn-default", href: "#"}
+        %span.glyphicon.glyphicon-pencil
+        Edit All Settings
+
+  .row
+    .col-sm-12
+      .panel.panel-default
+        .panel-heading
+          %h4.pull-left Social
+          %a{class: "btn btn-default pull-right", href: "#"}
+            %span.glyphicon.glyphicon-pencil
+            Edit Social
+          .clear
+        .panel-body
+          %table.table
+            %thead
+              %th
+                Setting
+              %th
+                Value                
+            %tbody  
+              %tr
+                %td
+                  %h4 Facebook URL
+                %td
+                  %input{type:"text", value: @setting.facebook_url, class: "form-control"}
+              %tr
+                %td
+                  %h4 Twitter Url 
+                %td
+                  %input{type:"text", value: @setting.twitter_url, class: "form-control"}
+              %tr
+                %td
+                  %h4 Instagram UUrl
+                %td
+                  %input{type:"text", value: @setting.instagram_url, class: "form-control"}
+
+             
+      .panel.panel-default
+        .panel-heading
+        .panel-heading
+          %h4.pull-left Analytics
+          %a{class: "btn btn-default pull-right", href: "#"}
+            %span.glyphicon.glyphicon-pencil
+            Edit Analytics
+          .clear
+        .panel-body
+          %table.table
+            %thead
+              %th
+                Setting
+              %th
+                Value                
+            %tbody   
+              %tr
+                %td
+                  %h4 Google Analytics ID 
+                %td
+                  %input{type:"text", value: @setting.ga, class: "form-control"}
+              %tr
+                %td
+                  %h4 Google Remarketing Tracking Pixel
+                %td
+                  %textarea{ value: @setting.ga, class: "form-control"}
+                    = @setting.ga
+
+          

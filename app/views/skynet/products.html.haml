@@ -1,0 +1,47 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-folder-open
+        Products
+    .col-sm-6.text-right
+      %input#product-list-filter.form-control{placeholder: "Filter Products"}
+
+  .row
+    .panel.panel-default
+      .panel-body
+        = paginate @products  
+        %table.table.table-striped
+          %thead
+            %th
+              
+            %th
+              Product name
+            %th
+              SKU
+            %th.text-center
+              Gemgento ID   
+            %th.text-center
+              Magento Id  
+            %th.text-center
+              Visibility
+          %tbody.product-list
+            - @products.each do |p|
+              %tr{ class: ("inactive" if p.visibility == 4)}
+                %td
+                  %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/thumb/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , width: "40"}
+                %td
+                  %a{ href: "/skynet/product/#{p.id}"}
+                    = truncate(p.name, :length => 50)
+                %td
+                  = p.sku
+                %td.text-center
+                  = p.id  
+                %td.text-center
+                  = p.magento_id 
+                %td.text-center
+                  - if p.visibility == 1
+                    %span.glyphicon.glyphicon-eye-open
+                  - if p.visibility == 4
+                    %span.glyphicon.glyphicon-eye-close
+= paginate @products                

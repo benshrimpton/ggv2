@@ -1,0 +1,26 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: gemgento_magento
+  username: root
+  password: ""
+  host: localhost
+  port: 3306
+
+beta:
+  adapter: mysql2
+  encoding: utf8
+  database: jeffreyrudes_beta
+  username: root
+  password: 4187239hfajbdfnsfsdDBNFS
+  host: localhost
+  port: 3306
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: jeffreyrudes_production
+  username: root
+  password: 4187239hfajbdfnsfsdDBNFS
+  host: localhost
+  port: 3306

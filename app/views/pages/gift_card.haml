@@ -1,0 +1,42 @@
+.container.text-center.user-account-container.page.gift-card
+  = form_for Gemgento::LineItem.new(itemizable: current_quote), url: gemgento.cart_add_item_path do |f|
+    = f.hidden_field :product_id, value: Gemgento::Product.find_by!(sku: '4-858').id
+    = f.hidden_field :qty_ordered, value: 1
+    = f.hidden_field :giftcard_amount, value: 'custom'
+    .row
+      .col-sm-8.col-sm-offset-2
+        %h2.page-header Gift Card
+        %p
+          The perfect gift, an electronic gift card in any amount that is emailed to the
+          email address of your choice. Jeffrey Rudes gift cards are accepted at all of
+          our shops and at www.jeffreyrudes.com. There is no expiration date.
+    .row
+      .col-sm-4.col-sm-offset-4.form-group.gift-card-amount.text-left
+        = f.label :giftcard_amount_custom, 'Enter Amount'
+        = f.number_field :giftcard_amount_custom, class: 'form-control', value: 100, step: 1, min: 10, max: 2000
+    .row
+      .col-sm-5.col-sm-offset-1.text-left
+        .form-group
+          = f.label :giftcard_recipient_name, 'Recipients Name'
+          = f.text_field :giftcard_recipient_name, class: 'form-control'
+        .form-group
+          = f.label :giftcard_recipient_name_confirmation, 'Confirm Recipients Name'
+          = f.text_field :giftcard_recipient_name_confirmation, class: 'form-control'
+        .form-group
+          = f.label :giftcard_message, 'Message'
+          = f.text_area :giftcard_message, class: 'form-control'
+      .col-sm-5.text-left
+        .form-group
+          = f.label :giftcard_recipient_email, 'Confirm Recipients email'
+          = f.email_field :giftcard_recipient_email, class: 'form-control'
+        .form-group
+          = f.label :giftcard_recipient_email_confirmation, 'Recipients email'
+          = f.email_field :giftcard_recipient_email_confirmation, class: 'form-control'
+        .form-group
+          = f.label :giftcard_sender_name, 'Your Name'
+          = f.text_field :giftcard_sender_name, class: 'form-control'
+        .form-group
+          = f.label :giftcard_sender_email, 'Your Email'
+          = f.email_field :giftcard_sender_email, class: 'form-control'
+        .form-group
+          = f.submit 'ADD TO BAG', class: 'btn checkout-button'

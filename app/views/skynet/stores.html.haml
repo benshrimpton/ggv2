@@ -1,0 +1,23 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-globe
+        Stores
+    .col-sm-6.text-right
+      %input#product-list-filter.form-control{placeholder: "Search"}
+
+  .row
+    %table.table.table-striped
+      %tbody#product-list
+        - @stores.each do |s|
+          
+          %tr
+            %td
+              %h3= s.title
+              %a{class: "btn btn-primary btn-default", href: "#"} Edit Store
+            %td 
+              = raw s.body
+    %a{class: "btn btn-primary btn-default", href: "#"} Add Ne Store          
+
+

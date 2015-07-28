@@ -1,0 +1,21 @@
+.home-image-logo
+.home-image-wrapper.conatiner
+  .table
+    .table-cell.image-container
+      - if @cover_image.present?
+        %img{src: @cover_image.image_desktop.url(:large), id: "home-image-2", class: "swap-image shown"}
+
+      - if @shop_image.present?
+        %img{data: @shop_image.image_desktop.url(:large), id: "swap-image-shop", class: "swap-image no-src", src: "/load-src.gif"}
+
+      - if @collections_image.present?  
+        %img{data:@collections_image.image_desktop.url(:large), id: "swap-image-collection", class: "swap-image no-src", src: "/load-src.gif"}
+
+      - if @journal_image.present? 
+        %img{data: @journal_image.image_desktop.url(:large), id: "swap-image-journal", class: "swap-image  no-src", src: "/load-src.gif"}
+
+      - if @store_image.present?  
+        %img{data: @store_image.image_desktop.url(:large), id: "swap-image-store", class: "swap-image no-src", src: "/load-src.gif"}
+
+      - if @account_image.present?  
+        %img{data: @account_image.image_desktop.url(:large), id: "swap-image-account", class: "swap-image no-src", src: "/load-src.gif"}

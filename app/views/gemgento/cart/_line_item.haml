@@ -1,0 +1,43 @@
+.row.cart-item-row
+  .col-sm-6.cart-item.cart-thumb
+
+    = link_to line_item.product do
+      = image_tag line_item_image_tag(line_item)
+
+    .cart-item-meta
+      %h4
+        = link_to line_item.product do
+          = line_item.product.name
+
+
+      .show-on-mobile
+        %span.mobile-price= number_to_currency(line_item.product.price, precision: 0)
+        .mobile-size
+          %span Size :
+          %span= product_size(line_item.product)
+        .mobile-qty
+          %span Price :
+          %span= number_to_currency line_item.product.price
+
+      %p= line_item.product.short_description
+
+      .cart-item-actions
+        %span= link_to 'delete', cart_remove_item_path(line_item), method: :delete, class: 'remove-item'
+        / %span.cart-item-ate= link_to 'save for later', "/user/wishlist/#{line_item.product_id}" , method: :post
+        %span.cart-item-ate
+          %a{href: "/user/wishlist/#{line_item.product_id}"}save for later
+
+    .clear
+
+  .col-sm-6.lineitem-totals-row
+    .col-sm-4.cart-size.text-center
+      .cart-cell-padded= product_size(line_item.product)
+
+    .col-sm-4.cart-qty.text-center
+      .cart-cell-padded
+        = line_item.qty_ordered.to_i
+
+    .col-sm-4.cart-price.text-right
+      .cart-cell-padded
+        /= number_to_currency(line_item.product.price, precision: 0)
+        = number_to_currency(line_item.product.price, strip_insignificant_zeros: true)

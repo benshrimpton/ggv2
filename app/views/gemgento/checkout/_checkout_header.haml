@@ -1,0 +1,10 @@
+%ul.ship_list_tab
+  %li
+    %a{class: ('active' if controller_name == 'address')}
+      %span 1 shipping
+  %li
+    %a{class: ('active' if controller_name == 'shipping_payment')}
+      %span 2 payment
+  %li
+    %a{class: ('active' if controller_name == 'confirm')}
+      %span 3 Review Order

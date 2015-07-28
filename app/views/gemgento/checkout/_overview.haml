@@ -1,0 +1,41 @@
+.shopping_bag_bot
+  .shipped_item_sec
+    %h3.cont_title In your bag
+    - quote.line_items.each do |item|
+      .col-sm-6
+        .col-xs-5.sh_item_col
+          = link_to product do
+            = product_image_tag item.product, "image", "thumb"
+        .col-xs-7.sh_item_col
+          .td_desc
+            = item.product.name
+          %span.td_desc
+            = number_to_currency(item.product.price, precision:0)
+          %span
+            = "qty #{item.qty_ordered.to_i}"
+        %i.clear_0
+
+    - unless quote.class == Gemgento::Order
+      .col-sm-6
+        - if quote.totals[:subtotal]
+          .total_box
+            .total_row
+              .col-xs-6 Subtotal
+              .col-xs-6.tot_price
+                = number_to_currency(quote.totals[:subtotal])
+              %i.clear_0
+            .total_row
+              .col-xs-6 Shipping
+              .col-xs-6.tot_price $X.XX
+              %i.clear_0
+            .total_row
+              .col-xs-6 tax
+              .col-xs-6.tot_price $X.XX
+              %i.clear_0
+            .total_row
+              .col-xs-6
+                %b total
+              .col-xs-6.tot_price
+                %b $XXX.XX
+              %i.clear_0
+            %i.clear_0

@@ -1,0 +1,5 @@
+#zoom-trigger.zoom-trigger
+%section#product-image-gallery.royalSlider.rsDefault
+  - @product.assets.where(store: current_store).each_with_index do |asset, i|
+    .slide{:data => {:image_zoom => asset.image.url(:medium, false)}}
+      %a.rsImg{:href => asset.image.url(:small, false)}

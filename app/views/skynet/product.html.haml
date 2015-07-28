@@ -1,0 +1,40 @@
+.container-fluid
+  .row.page-header
+    .col-sm-12
+      %h4.pull-left
+        %span.glyphicon.glyphicon-folder-open
+        #{@product.name}
+      
+
+  .row
+    .panel.panel-default
+      .panel-heading
+        %h5.pull-left= @product.name
+        %span.pull-right
+          %span Stock Level
+          %span.badge 12
+        .clear  
+      .panel-body
+        .row 
+          .col-sm-6  
+            %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive"}    
+          .col-sm-6
+            .form-group
+              %label Product Name
+              %input{type:"text", value: @product.name, class: "form-control"}
+              %hr
+              %b Product Id : #{@product.id}
+              %b Magento Id : #{@product.magento_id}
+              %hr
+              %b SKU  #{@product.sku}
+              %b PRICE  #{@product.price}
+              %hr
+            .form-group
+              %label Short Description
+              %textarea{ value: @product.short_description, class: "form-control"}
+                = @product.short_description
+            .form-group
+              %label Description
+              %textarea{ value: @product.description, class: "form-control"}
+                = @product.description
+

@@ -1,0 +1,11 @@
+#zoom-trigger.zoom-trigger
+.product-thumbs
+
+  - @product.assets.where(store: current_store).each_with_index do |asset, i|
+    %a.rsImg{:href => "#image-#{i+1}"}
+      = image_tag asset.image.url(:thumb, false), class: 'img-responsive rsTmb'
+
+%section#product-image-gallery.royalSlider.rsDefault
+  - @product.assets.where(store: current_store).each_with_index do |a|
+    .slide{:data => {:image_zoom => a.image.url(:original, false)}}
+      %a.rsImg{:href => a.image.url(:medium, false)}

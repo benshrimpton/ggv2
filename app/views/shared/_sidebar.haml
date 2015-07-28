@@ -1,0 +1,16 @@
+.sidebar-mobile
+  %select.mobile-sidebar-select
+    - Gemgento::Category.top_level.navigation.each do |category|
+      %option{ value: category.name, data: { url: category_path(category) }}= category.name
+
+%nav.sidebar-nav#nav-list
+  %ul
+    - Gemgento::Category.top_level.navigation.each do |category|
+      %li{ class: side_nav_classes(category) }
+        = link_to category_path(category) do
+          %span.no-current= category.name
+          - if category.children.any?
+            %ul
+              - category.children.navigation.each do |child_category|
+                %li
+                  = link_to child_category.name, category_path(child_category)

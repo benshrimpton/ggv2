@@ -1,0 +1,74 @@
+.container.user-account-container
+  .wishlist-flash-messages
+    = render partial: "gemgento/user/account_header"
+
+    = link_to("< Back to Shop", :back, class: "back-btn fancylink")
+
+  .row.order-heading
+  - if @wishlist_items.count > 0
+    .row.order-heading.wishlist-heading
+      .col-xs-5
+        = pluralize(@wishlist_items.count, 'Item')
+      .col-xs-4.hide-on-mobile
+        Details
+      .col-xs-3.hide-on-mobile
+        Price
+    - @wishlist_items.order("created_at desc").each_with_index do |item, i|
+      .row.wishlist-items
+        .col-sm-5.image
+          = link_to item.product do
+            = product_image_tag item.product, 'image', 'thumb'
+          .show-on-mobile.actions
+            = link_to "/user/wishlist/#{item.product.id}", method: :delete do
+              %span remove
+            %span &nbsp;|&nbsp;
+            %span.edit
+              =link_to item.product do
+                edit
+
+        .col-sm-4.wishlist-meta
+          %h2= item.product.name
+          %span= product_size(item.product) 
+          .show-on-mobile.price= number_to_currency item.product.price, precision: 2
+          %p.desc= item.product.short_description
+
+          = form_for Gemgento::LineItem.new(itemizable: current_quote), url: cart_add_item_path, id: 'add_to_cart' do |f|
+            - if item.product.magento_type == "configurable"
+
+              .qty.col-sm-6.no-padding
+                %label Qty
+                .select
+                  = f.select :qty_ordered, options_for_select(1..10, 1), {} , class: 'form-control wishlist-select'
+
+              .size.col-sm-6.no-padding
+                %label Size
+                = f.select :product_id , html: { class: "form-control" } do
+                  -item.product.simple_products.each do |p, size|
+                    %option{value: "#{p.id}" } #{p.size}
+
+
+              = f.submit 'ADD TO BAG', class: 'btn add-to-cart'  
+            - else
+              .out-of-stock-button.submit-btn.added-to-bag
+                OUT OF STOCK         
+
+
+        .col-sm-3
+          %p.pull-left.price.hide-on-mobile
+            = number_to_currency(item.product.price, strip_insignificant_zeros: true)
+          %p.pull-right
+            %span.remove-link.hide-on-mobile
+              = link_to "/user/wishlist/#{item.product.id}", method: :delete do
+                %span delete
+
+  - else
+    .row.text-center
+      %h2 Your Have No Saved Items
+
+
+
+
+
+
+
+

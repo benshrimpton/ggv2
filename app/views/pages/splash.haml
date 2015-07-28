@@ -1,0 +1,63 @@
+!!!
+%html
+  %head
+    %title Jeffrey Rüdes
+    %meta{charset: "UTF-8"}
+    %meta{name: 'description', content:'Jeffrey Rüdes.  Menswear Made in Italy.'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes'}
+    %link{href: '/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'}
+    %link{href: '/favicon.ico', rel: 'icon', type: 'image/x-icon'}
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body.splash
+    .container.top
+      .row.top-splash
+        .col-xs-12
+          .logo
+      .row.msg-splash
+        .col-xs-12.uppercase
+          LAUNCHING JULY 2015
+
+    
+      .row.image-splash
+        .col-xs-12
+          %img.shot{src: '/assets/splash-shot.jpg'}
+
+      .row.subscribe-form
+        .splash-subscribe-form        
+          = form_for :subscriber, url: '/subscribers', method: 'post', :id => 'form' do |f|
+            %input{type: "email", name: "subscriber[email]", required: 'required', id: 'subform' , placeholder: 'Enter email for updates'}
+            = f.submit "SEND" 
+      #success
+        %p Thank you for subscribing           
+      .row.info-splash.bottom
+        .col-xs-12    
+          © copyright JEFFREY RUDES #{Date.today.year}
+
+
+      :javascript
+        $('.shot').load(function() {
+          $(this).fadeIn(200);
+          rsize();
+        }).each(function() { if (this.complete) $(this).load(); });
+        $(window).resize(rsize);
+        
+        function rsize() {
+          var sw = $(window).width();
+          if(sw<(467+60)) {
+            $('.image-splash img').css({width: (sw-60)+'px'})
+            $('.image-splash').css({height: ((sw-60)*1.331)+'px'})
+          }
+        }
+      = include_rails_script
+
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59913216-1', 'jeffreyrudes.com');
+      ga('send', 'pageview');

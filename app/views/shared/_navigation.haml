@@ -1,0 +1,72 @@
+.toggle-nav
+  .inner
+    %span
+    %span
+    %span
+%header.container.main-header
+  %a{:href => '/cart'}
+    .cart-icon#cart-icon-mobile
+      %span.total
+        - if current_quote.item_quantity.to_i > 0
+          %span.has-qty= current_quote.item_quantity.to_i
+      %span.cart-icon
+  .row.top-row
+    .col-md-3.logo-wrap
+      %h1.logo
+        %a{:href => "/"} Jeffrey Rudes
+    %nav.col-md-8.col-md-offset-1.nav#nav
+      %ul.main-nav
+        %li.has-children.nav-shop.nav-img-switcher{ "data-url" => (@shop_image.image_desktop.url(:large) if @shop_image.present?), "data-swap-id" => "swap-image-shop"}
+          %span
+            %p.top-menu shop
+            %ul
+              - Gemgento::Category.top_level.navigation.each do |category|
+                %li
+                  %a{href: '/categories/'+category.url_key }=category.name
+
+        %li.has-children.nav-collections.nav-img-switcher{ "data-url" => (@collections_image.image_desktop.url(:large) if @collections_image.present?), "data-swap-id" => "swap-image-collection"}
+          %span
+            %p.top-menu collections
+            %ul
+              %li
+                %b Fall 2015
+                %ul
+                  %li
+                    %a{:href => "/collections/fall-2015"} Lookbook
+
+        %li.nav-img-switcher{ "data-url" => (@journal_image.image_desktop.url(:large) if @journal_image.present?), "data-swap-id" => "swap-image-journal"}
+          %span
+            %a{:href => "/journal"} Journal
+        %li.nav-img-switcher{ "data-url" => (@store_image.image_desktop.url(:large) if @store_image.present?), "data-swap-id" => "swap-image-store"}
+          %span
+            %a{:href => "/store"} Store
+        - if current_user
+          %li.has-children
+            %span
+              %p.top-menu account
+              %ul
+                %li
+                  = link_to 'Sign Out', '/user/sign_out', method: :delete
+                %li
+                  = link_to 'Account Info', "/user/"
+                %li
+                  = link_to 'Addresses', "/user/addresses/"
+                %li
+                  = link_to 'Billing Info', "/user/saved_credit_cards/"
+                %li
+                  = link_to 'Order History', "/user/orders/"
+                %li
+                  = link_to 'Saved Items', "/user/wishlist/"
+        - else
+          %li.nav-img-switcher{"data-url" => (@account_image.image_desktop.url(:large) if @account_image.present?), "data-swap-id" => "swap-image-account"}
+            %span= link_to 'Account', "/user/"
+
+      #bag-icon.bag-icon
+        #bag-icon-glyph
+          = render 'shared/mini_cart'
+
+      #search-icon.search-icon
+      .search-wrapper
+        = form_tag "/search", method: :get do
+          %input{:type=>"search", :name=>"query", :id=>"query", :placeholder=>"search", :required=>"required", :class=>'search-field'}
+          %input{:type=>"submit"}

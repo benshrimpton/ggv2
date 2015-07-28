@@ -1,0 +1,123 @@
+.checkout-column.col-md-5.col-md-offset-2
+  %h4.gold-text ORDER OVERVIEW
+  .order-overview
+    - quote.line_items.each do |item|
+      .item-block.col-md-12
+        .image-container.col-md-4
+          .col-sm-5.text-left
+            %section.checkout-summary-cart
+              %header
+                %h2.account-heading-secondary Bag (#{current_quote.item_quantity.to_i})
+              %section
+                - current_quote.line_items.each do |line_item|
+                  - p = line_item.product.configurable_products.first
+                  %section.row.cart-item
+                    %figure
+                      =link_to p do
+                        %img.img-responsive.pull-left{:src => p.assets.first.image.url(:thumb)}
+                    .cart-item-meta
+                      %h4
+                        =link_to p do
+                          = p.name
+                      %p= p.short_description
+                      / %span
+                      /   - if line_item.product.on_sale?
+                      /     =link_to p do
+                      /       %span.original-price
+                      /         %s= number_to_currency(p.original_price)
+                      /       %span.current-price= number_to_currency(p.price)
+                      /   - else
+                      /     =link_to p do
+                      /       %span.current-price= number_to_currency(p.price)
+                      %span.pull-left
+                        %p
+                          Size: #{line_item.product.size}
+                      %span.pull-right
+                        %p
+                          Qty: #{number_with_precision(line_item.qty_ordered.to_i, precision: 0)}
+                      .clear
+
+
+            = product_image_tag item.product, "image", "medium"
+        .details-container.col-md-7.col-md-offset-1
+          .name
+            - if item.product.color
+              = "#{item.product.color.upcase} #{item.product.name.upcase}"
+            - else
+              = item.product.name.upcase
+          .price
+            - if (item.product.magento_type != 'giftvoucher') && (item.product.on_sale?(current_user))
+              .sale-price
+                = number_to_currency item.product.price, precision: (item.product.price.round == item.product.price) ? 0 : 2
+              .original-price
+                = number_to_currency item.product.original_price, precision: (item.product.original_price.round == item.product.original_price) ? 0 : 2
+                .strike
+            -else
+              = number_to_currency item.price, precision: (item.price.round == item.price) ? 0 : 2
+          .qty
+            = "QTY #{item.qty_ordered.to_i}"
+          - if item.product.size != "OS" && !item.product.size.blank?
+            .size
+              = "SIZE #{item.product.size}"
+
+  - unless quote.class == Gemgento::Order
+    .order-totals.col-md-12
+      - if quote.totals[:subtotal]
+        .subtotal-label.total-label.col-md-4
+          SUBTOTAL
+        .subtotal-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.totals[:subtotal])
+
+      - unless quote.totals[:discounts].empty?
+        - quote.totals[:discounts].each do |code, amount|
+          .discount-label.total-label.col-md-4
+            = code.upcase
+          .discount-val.total-val.col-md-7.col-md-offset-1
+            = number_to_currency(amount)
+
+      - if quote.totals[:shipping] > 0
+        .shipping-label.total-label.col-md-4
+          SHIPPING
+        .shipping-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.totals[:shipping])
+
+      - if quote.totals[:tax] > 0
+        .tax-label.total-label.col-md-4
+          TAX
+        .tax-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.totals[:tax])
+
+      - if quote.totals[:gift_card] != 0
+        .tax-label.total-label.col-md-4
+          GIFT CARD
+        .tax-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency quote.totals[:gift_card], precision: 2
+
+      - if quote.totals[:total] > 0 || quote.totals[:gift_card] != 0
+        .grand-total-label.total-label.col-md-4
+          TOTAL
+        .grand-total-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.totals[:total])
+
+  - else
+    .order-totals.col-md-12
+      - if quote.base_subtotal
+        .subtotal-label.total-label.col-md-4
+          SUBTOTAL
+        .subtotal-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.base_subtotal)
+      - if quote.base_shipping_amount > 0
+        .shipping-label.total-label.col-md-4
+          SHIPPING
+        .shipping-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.base_shipping_amount)
+      - if quote.base_tax_amount > 0
+        .tax-label.total-label.col-md-4
+          TAX
+        .tax-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.base_tax_amount)
+      - if quote.base_grand_total > 0
+        .grand-total-label.total-label.col-md-4
+          TOTAL
+        .grand-total-val.total-val.col-md-7.col-md-offset-1
+          = number_to_currency(quote.base_grand_total)

@@ -1,0 +1,32 @@
+%nav.user-nav.col-sm-12
+  %h4.account-heading MY ACCOUNT
+
+  = render partial: 'shared/flash_messages'
+  = render partial: 'shared/error_messages', locals: { model: @existing_user }
+  = render partial: 'shared/error_messages', locals: { model: @new_user }
+
+  .sidebar-mobile.account-sidebar-mobile
+    %select.mobile-sidebar-select.account-mobile-sidebar-select
+      %option{ data: { url: "/user"  }}Account Info
+      %option{ selected: true, data: { url: "/user/addresses"  }}Addresses
+      %option{ data: { url: "/user/saved_credit_cards"  }}Billing Info
+      %option{ data: { url: "/user/orders"  }}Order History
+      %option{ data: { url: "/user/wishlist" }}Saved Items
+      -#%option{ data: { url: main_app.user_gift_cards_path }} Gift Cards
+
+  .user-nav-hide-on-mobile
+    - unless controller_name == "registration_session" && action_name == "new"
+      - if current_user
+        %ul
+          %li.user{class: "#{ 'active' if (params[:controller] == 'gemgento/user/home') || (params[:controller] == 'gemgento/user/registrations')}"}
+            %a{href: "/user"} Account Info
+          %li.addresses{class: "#{ 'active' if params[:controller] == 'gemgento/user/addresses'  }"}
+            %a{href: "/user/addresses"} Addresses
+          %li.billing{ class: ('active' if controller_name == 'saved_credit_cards') }
+            = link_to 'Billing Info', gemgento.user_saved_credit_cards_path
+          %li.orders{class: "#{ 'active' if params[:controller] == 'gemgento/user/orders' }"}
+            %a{href: "/user/orders"} Order History
+          %li.wishlist{class: "#{ 'active' if params[:controller] == 'gemgento/user/wishlist_items'}"}
+            %a{href: "/user/wishlist"} Saved Items
+          -#%li.gift_cards{class: "#{ 'active' if params[:controller] == 'user/gift_cards'}"}
+          -#  = link_to 'Gift Cards', main_app.user_gift_cards_path

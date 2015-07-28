@@ -1,0 +1,31 @@
+= form_for Gemgento::LineItem.new(itemizable: current_quote), url: cart_add_item_path, id: 'add_to_cart' do |f|
+  .hijack-wrap
+  .select-wrap
+    = f.label :qty_ordered, 'Qty'
+    = f.select :qty_ordered, options_for_select(1..10)
+
+  - if @product.magento_type == 'configurable'
+    .select-wrap.size
+      = f.label :product_id, 'Select Size'
+      = f.select :product_id do
+        %option
+        - simple_products.each do |size, product|
+          - product.inventories.where(store: current_store).each do |i|
+            - out = i.quantity <= 0
+            - if out
+              %option{ value: product.id, class:"out-of-stock", disabled: "disabled" }#{size}
+            - else
+              %option{ value: product.id, class:"in-stock"}#{size} 
+
+  - else
+    = f.hidden_field :product_id, value: @product.id
+
+  #form-errors
+
+  - if @product.in_stock?
+
+    = f.submit 'ADD TO BAG', class: 'btn add-to-cart'
+
+  - else 
+
+    .out-of-stock-notice OUT OF STOCK  
