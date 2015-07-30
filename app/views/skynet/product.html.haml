@@ -1,40 +1,74 @@
 .container-fluid
   .row.page-header
-    .col-sm-12
+    .col-sm-6
       %h4.pull-left
-        %span.glyphicon.glyphicon-folder-open
+        %span.glyphicon.glyphicon-tag
         #{@product.name}
-      
+    .col-sm-6.text-right
+      %a.btn.btn-default.btn-primary{href: ""} Save Product 
 
   .row
-    .panel.panel-default
-      .panel-heading
-        %h5.pull-left= @product.name
-        %span.pull-right
-          %span Stock Level
-          %span.badge 12
-        .clear  
-      .panel-body
-        .row 
-          .col-sm-6  
-            %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive"}    
-          .col-sm-6
-            .form-group
-              %label Product Name
-              %input{type:"text", value: @product.name, class: "form-control"}
-              %hr
-              %b Product Id : #{@product.id}
-              %b Magento Id : #{@product.magento_id}
-              %hr
-              %b SKU  #{@product.sku}
-              %b PRICE  #{@product.price}
-              %hr
-            .form-group
-              %label Short Description
-              %textarea{ value: @product.short_description, class: "form-control"}
-                = @product.short_description
-            .form-group
-              %label Description
-              %textarea{ value: @product.description, class: "form-control"}
-                = @product.description
+    .col-sm-9
+      .panel.panel-default
+        .panel-heading
+          %h5.pull-left= @product.name
+          %span.pull-right
+            %span Stock Level
+            %span.badge 12
+          .clear  
+        .panel-body
+          .row 
+            .col-sm-6  
+              %img.featured-image{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive"} 
+              %label Change Image Order
+              .thumbs.sortable
+                %img.thumbnail.pull-left{ src: "/prod_2.jpg" , class: "img-responsive", width: "90"} 
+                %img.thumbnail.pull-left{ src: "/prod_3.jpg" , class: "img-responsive", width: "90"} 
+                %img.thumbnail.pull-left{ src: "/prod_4.jpg" , class: "img-responsive", width: "90"} 
+
+            .col-sm-6
+              .form-group
+                %label Product Name
+                %input{type:"text", value: @product.name, class: "form-control"}
+                %hr
+                %b Product Id :
+                %span.badge #{@product.id}
+                %b Magento Id :
+                %span.badge #{@product.magento_id}
+                %b Type :
+                %span.badge #{@product.magento_type}
+                %hr
+                %b SKU : 
+                %span.badge #{@product.sku}
+                %b PRICE :
+                %span.badge #{@product.price}
+                %hr
+              .form-group
+                %label Short Description
+                %textarea{ value: @product.short_description, class: "form-control"}
+                  = @product.short_description
+              .form-group
+                %label Description
+                %textarea{ value: @product.description, class: "form-control"}
+                  = @product.description
+              .form-group
+                %label Related Products
+                #sortable
+                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+              
+              - if @product.magento_type = "configurable"
+                .form-group
+                  %label Associated Simple Products
+                  = @product.simple_products.each do |s|
+                    .col-sm-4
+                      %h5= s.name
+    .col-sm-3 
+      .panel.panel-default
+        .panel-heading
+          right Col
+        .panel-body
+          %p Some content here            
+
 

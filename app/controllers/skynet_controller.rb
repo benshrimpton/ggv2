@@ -26,9 +26,21 @@ class SkynetController < ApplicationController
   def lookbooks
     @lookbooks = Collection.all
   end 
-
+  def lookbook
+     @lookbook= Collection.find(params[:id])
+  end 
+  def gallery
+     @lookbook= Collection.find(params[:id])
+  end 
   def stores
     @stores = StoreLocation.all
+  end
+
+  def pages
+    @pages = Page.all
+  end
+  def page
+    @page = Page.find(params[:id])
   end
 
   def categories

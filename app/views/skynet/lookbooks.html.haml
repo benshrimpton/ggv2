@@ -3,24 +3,34 @@
     .col-sm-6
       %h4.pull-left
         %span.glyphicon.glyphicon-globe
-        Overview
+        LookBooks
     .col-sm-6.text-right
-      %input#product-list-filter.form-control{placeholder: "Search"}
 
   .row
-    %table.table.table-striped
-      %thead
-        %th
-          Image
-        %th
-          Lookbook Titile
-        %th
-          SKU 
-        %th
-          Magento Id  
-        %th
-          Visibility
-      %tbody#product-list
-        - @lookbooks.each do |lb|
-          %h3= lb.title
-
+    .panel.panel-default
+      .panel-heading
+        %h4 Lookbook
+      .panel-body  
+        %table.table
+          %thead
+            %th
+              Order           
+            %th
+              Title
+            %th
+              Url  
+            %th.text-right
+              Edit         
+          %tbody.sortable
+            - @lookbooks.each do |lb|
+              %tr
+                %td
+                  \#
+                %td
+                  %a{href:"/skynet/lookbook/#{lb.id}/"}
+                    %b= raw lb.name
+                %td= lb.url_key
+                %td.text-right
+                  %a.btn.btn-default{href:"/skynet/lookbook/#{lb.id}/"}
+                    %span.glyphicon.glyphicon-pencil
+                    Edit LookBook

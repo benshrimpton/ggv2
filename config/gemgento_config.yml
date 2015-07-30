@@ -2,9 +2,9 @@ development:
   license_key: centro39
   combined_shipping_payment: true
   magento:
-    url: http://magento.stage.jeffreyrudes.com
-    username: gemgento
-    api_key: VM!hJD3R48Bu%m7h
+    url: http://127.0.0.1:8888/magento
+    username: admin
+    api_key: gemgento
   extensions:
     authorize-net-cim-payment-module: true
   layout: application

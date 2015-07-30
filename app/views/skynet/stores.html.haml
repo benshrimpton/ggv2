@@ -2,22 +2,24 @@
   .row.page-header
     .col-sm-6
       %h4.pull-left
-        %span.glyphicon.glyphicon-globe
+        %span.glyphicon.glyphicon-folder-open
         Stores
     .col-sm-6.text-right
-      %input#product-list-filter.form-control{placeholder: "Search"}
+      %a{class: "btn btn-default", href: "#"}
+        + Add New Store
+      %a{class: "btn btn-primary btn-default", href: "#"}
+        Save All
 
   .row
-    %table.table.table-striped
-      %tbody#product-list
+    .panel.panel-default
+      .panel-heading
+        %h4 Stores Locations
+      .panel-body
         - @stores.each do |s|
-          
           %tr
             %td
               %h3= s.title
-              %a{class: "btn btn-primary btn-default", href: "#"} Edit Store
             %td 
               = raw s.body
-    %a{class: "btn btn-primary btn-default", href: "#"} Add Ne Store          
 
 

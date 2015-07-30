@@ -133,14 +133,37 @@ tr.inactive {
   border: 1px solid #dddddd;
   margin-left: -1px;
 }
+.pagination .current {background: #337ab7; color: white}
 /*CATGEORY*/
 .category-item {
+  position: relative;
   figcaption {
     padding-bottom: 15px;
     small {
       font-size: 10px;
       font-weight: bold;
     }
+  }
+  .product-link {
+    background: rgba(255, 255, 255, .8);
+    position: absolute;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    left: 15px;
+    right: 15px;
+    bottom: 30px;
+    opacity: 0;
+    transition: opacit ease .3s;
+    a {
+      color: black;
+      font-weight: bold;
+    }
+  }
+  &:hover {
+      .product-link {
+        opacity: 1
+      }
   }
 }
 .sort-category {
@@ -162,4 +185,14 @@ tr.inactive {
 .ui-sortable-helper {
   opacity: .5;
   background-color: silver;
+}
+
+
+.featured-image {
+  margin-bottom: 15px;
+}
+.thumbs {
+  img {
+    margin: 0 5px 5px 0;
+  }
 }

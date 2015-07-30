@@ -17,7 +17,7 @@
             .macbook
               .store-preview-mask
 
-    .col-sm-6
+    .col-sm-4
       .panel
         .panel-body
           %table.table.table-striped
@@ -35,7 +35,7 @@
                     = truncate(p.name, :length => 20)
                   %td
                     %span.glyphicon.glyphicon-eye-open  
-    .col-sm-6
+    .col-sm-4
       .panel
         .panel-body
           %table.table.table-striped
@@ -51,4 +51,21 @@
                     %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/thumb/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , width: "40"}
                     = truncate(p.name, :length => 20)
                   %td
-                    =p.sku                
+                    =p.sku  
+      .col-sm-4
+        .panel
+          .panel-body
+            %table.table.table-striped
+              %thead
+                %th
+                  %h4 Best Selling Products
+                %th
+                  SKU
+              %tbody#product-list
+                - @products.take(5).each do |p|
+                  %tr
+                    %td
+                      %img{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/thumb/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , width: "40"}
+                      = truncate(p.name, :length => 20)
+                    %td
+                      =p.sku                               

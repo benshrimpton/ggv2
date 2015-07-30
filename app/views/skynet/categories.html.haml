@@ -2,54 +2,150 @@
   .row.page-header
     .col-sm-6
       %h4.pull-left
-        %span.glyphicon.glyphicon-globe
-        Overview
+        %span.glyphicon.glyphicon-folder-open
+        Categories
     .col-sm-6.text-right
       %input#product-list-filter.form-control{placeholder: "Filter Categories"}
 
   .row
     .panel.panel-default
       .panel-heading
-        %h5 Magento Categories
-      .panel-body  
-        %table.table.table-striped
-          %thead
-            %th
-              Category Name
-            %th
-              URL Key
-            %th
-              Staus 
-            %th.text-center
-              Parent Id  
-            %th
-              Show in Menu?
-            %th
-              Merchandise              
-          %tbody#product-list
-            - @categories.each do |c|
-              %tr{ class: ("inactive" if c.is_active == false)}
-                %td
-                  %a.sort-category{href: "/skynet/category/#{c.id}"}
-                    %b= c.name
-                %td
-                  %small= c.url_key
-                %td
-                  - if c.is_active == true
-                    Active
-                  - else
-                    Inactive 
-                %td.text-center
-                  = c.parent_id  
-                %td
-                  - if c.include_in_menu == true
-                    Yes
-                  - else 
-                    No
-                %td
-                  %a.sort-category{href: "/skynet/category/#{c.id}"}
-                    %span.glyphicon.glyphicon-refresh
-                    Sort Category   
+        %h5 Magento Categories by Store
+        .clear
+      .panel-body
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#home", :role => "tab"}  UK
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#profile", :role => "tab"} USA
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#messages", :role => "tab"} JAPAN
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "settings", "data-toggle" => "tab", :href => "#settings", :role => "tab"} HONG KONG
+        / Tab panes
+        .tab-content
+          #home.tab-pane.active{:role => "tabpanel"}
+            %table.table.table-striped
+              %thead
+                %th
+                  Category Name
+                %th
+                  URL Key
+                %th
+                  Staus 
+                %th.text-center
+                  Parent Id  
+                %th
+                  Show in Menu?
+                %th
+                  Merchandise              
+              %tbody#product-list
+                - @categories.each do |c|
+                  %tr{ class: ("inactive" if c.is_active == false)}
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %b= c.name
+                    %td
+                      %small= c.url_key
+                    %td
+                      - if c.is_active == true
+                        Active
+                      - else
+                        Inactive 
+                    %td.text-center
+                      = c.parent_id  
+                    %td
+                      - if c.include_in_menu == true
+                        Yes
+                      - else 
+                        No
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %span.glyphicon.glyphicon-refresh
+                        Sort Category  
+          #profile.tab-pane{:role => "tabpanel"}
+            %table.table.table-striped
+              %thead
+                %th
+                  Category Name
+                %th
+                  URL Key
+                %th
+                  Staus 
+                %th.text-center
+                  Parent Id  
+                %th
+                  Show in Menu?
+                %th
+                  Merchandise              
+              %tbody#product-list
+                - @categories.each do |c|
+                  %tr{ class: ("inactive" if c.is_active == false)}
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %b= c.name
+                    %td
+                      %small= c.url_key
+                    %td
+                      - if c.is_active == true
+                        Active
+                      - else
+                        Inactive 
+                    %td.text-center
+                      = c.parent_id  
+                    %td
+                      - if c.include_in_menu == true
+                        Yes
+                      - else 
+                        No
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %span.glyphicon.glyphicon-refresh
+                        Sort Category 
+          #messages.tab-pane{:role => "tabpanel"}
+            %table.table.table-striped
+              %thead
+                %th
+                  Category Name
+                %th
+                  URL Key
+                %th
+                  Staus 
+                %th.text-center
+                  Parent Id  
+                %th
+                  Show in Menu?
+                %th
+                  Merchandise              
+              %tbody#product-list
+                - @categories.each do |c|
+                  %tr{ class: ("inactive" if c.is_active == false)}
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %b= c.name
+                    %td
+                      %small= c.url_key
+                    %td
+                      - if c.is_active == true
+                        Active
+                      - else
+                        Inactive 
+                    %td.text-center
+                      = c.parent_id  
+                    %td
+                      - if c.include_in_menu == true
+                        Yes
+                      - else 
+                        No
+                    %td
+                      %a.sort-category{href: "/skynet/category/#{c.id}"}
+                        %span.glyphicon.glyphicon-refresh
+                        Sort Category 
+          #settings.tab-pane{:role => "tabpanel"}
+
+
+ 
 
 
 

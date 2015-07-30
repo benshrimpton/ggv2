@@ -1,0 +1,73 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-folder-open
+        #{@lookbook.name}
+    .col-sm-6.text-right
+      %a.btn.btn-default{href: "/skynet/lookbooks/"} Back To Lookbooks
+      %a.btn.btn-default.btn-primary{href: ""} Save Lookbook
+
+  .row
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %h4.pull-left
+            %span.glyphicon.glyphicon-facetime-video
+            Video
+          %span.pull-right
+            Last Updated
+            %span.badge #{@lookbook.updated_at}
+          .clear
+        .panel-body 
+          .form-group
+            %label Title
+            %input{type: "text", value: @lookbook.name, class: "form-control"}
+          .form-group
+            %label Url
+            %input{type: "text", value: @lookbook.url_key, class: "form-control"}
+          .form-group
+            %label Video ID
+            %input#video-id{type: "text", value: @lookbook.video_id, class: "form-control"}
+          .form-group
+            .lookbook-video
+              %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/#{@lookbook.video_id}", :width => "560"}
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %h4.pull-left
+            %span.glyphicon.glyphicon-picture
+            Gallery Images
+          %span.pull-right
+            %a.btn.btn-default.btn-primary{href: ""} Edit Gallery
+          .clear
+        .panel-body.sortable 
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}                    
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}  
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}                    
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"}
+          %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg", width: "60"} 
+
+
+
+
+

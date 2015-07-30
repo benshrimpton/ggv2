@@ -1,11 +1,10 @@
 .container-fluid
   .row.page-header
-    .col-sm-6
+    .col-sm-8
       %h4.pull-left
-        %span.glyphicon.glyphicon-globe
-        = @category.name
-    .col-sm-6.text-right
-      %input#product-list-filter.form-control{placeholder: "Filter Categories"}
+        %span.glyphicon.glyphicon-folder-open
+        Category : #{@category.name}
+      
 
   .row
     .panel.panel-default
@@ -14,7 +13,9 @@
           %a{href: "/skynet/categories"} Categories
           %span /
           = @category.name
+
         %span.pull-right
+          %input#product-list-filter.form-control.pull-left{placeholder: "Filter Categories", style:"width:300px; margin-right:20px;"}
           %span.glyphicon.glyphicon-th-large.toggle-category
           %span.glyphicon.glyphicon-th.toggle-category
         .clear
@@ -24,6 +25,8 @@
             .col-sm-2.category-item
               %figure
                 %img{ src: "/CJR1FWV02_010_Jeffrey-Rudes-Coats-CJR1FWV02-010.jpg" , class: "img-responsive"}
+                .product-link
+                  %a{href: "/skynet/product/#{product.id}"} Edit Product
                 %figcaption
                   %small SKU: #{product.sku}
                   %br

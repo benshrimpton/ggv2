@@ -52,11 +52,15 @@ Rails.application.routes.draw do
   get 'skynet/products', to: 'skynet#products'
   get 'skynet/settings', to: 'skynet#settings'
   get 'skynet/lookbooks', to: 'skynet#lookbooks'
+  get 'skynet/lookbook/:id', to: 'skynet#lookbook'
+  get 'skynet/lookbook/:id/gallery', to: 'skynet#gallery'
   get 'skynet/stores', to: 'skynet#stores'
   get 'skynet/categories', to: 'skynet#categories'
   get 'skynet/category/:id', to: 'skynet#category'
   get 'skynet/product/:id', to: 'skynet#product'
   get 'skynet/settings', to: 'skynet#settings'
+  get 'skynet/pages', to: 'skynet#pages'
+  get 'skynet/page/:id', to: 'skynet#page'
 
   # Gift Cards
   namespace :user do

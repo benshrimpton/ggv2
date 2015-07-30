@@ -25,6 +25,7 @@ gem 'tinymce-rails'
 gem 'activeadmin', github: 'activeadmin'
 gem 'rack-cache'
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # Search
 gem 'sunspot_rails', '~> 2.1.1'

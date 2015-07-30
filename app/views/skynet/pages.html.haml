@@ -1,0 +1,37 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-book
+        Pages
+    .col-sm-6.text-right
+
+  .row
+    .panel.panel-default
+      .panel-heading
+        %h4 Pages
+      .panel-body  
+        %table.table
+          %thead
+            %th
+              Page Order           
+            %th
+              Page Title
+            %th
+              Page Url  
+            %th.text-right
+              Edit Page                
+          %tbody.sortable
+            - @pages.each do |p|
+              %tr
+                %td
+                  \#
+                %td
+                  %b
+                    %a{href:"/skynet/page/#{p.id}/"}
+                      = raw p.page_title
+                %td= p.url_key
+                %td.text-right
+                  %a.btn.btn-default{href:"/skynet/page/#{p.id}/"}
+                    %span.glyphicon.glyphicon-pencil
+                    Edit Page

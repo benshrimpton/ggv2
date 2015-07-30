@@ -7,17 +7,14 @@
     .col-sm-6.text-right
       %a{class: "btn btn-primary btn-default", href: "#"}
         %span.glyphicon.glyphicon-pencil
-        Edit All Settings
+        Save All Settings
 
   .row
-    .col-sm-12
+    .col-sm-3
+      %h4 Social
+      %p Your social media URLS are saved here.
+    .col-sm-9  
       .panel.panel-default
-        .panel-heading
-          %h4.pull-left Social
-          %a{class: "btn btn-default pull-right", href: "#"}
-            %span.glyphicon.glyphicon-pencil
-            Edit Social
-          .clear
         .panel-body
           %table.table
             %thead
@@ -28,29 +25,25 @@
             %tbody  
               %tr
                 %td
-                  %h4 Facebook URL
+                  %label Facebook UrL
                 %td
                   %input{type:"text", value: @setting.facebook_url, class: "form-control"}
               %tr
                 %td
-                  %h4 Twitter Url 
+                  %label Twitter Url 
                 %td
                   %input{type:"text", value: @setting.twitter_url, class: "form-control"}
               %tr
                 %td
-                  %h4 Instagram UUrl
+                  %label Instagram Url
                 %td
                   %input{type:"text", value: @setting.instagram_url, class: "form-control"}
-
-             
+  .row
+    .col-sm-3
+      %h4 Analytics
+      %p Your Analytics settings are saved here.
+    .col-sm-9             
       .panel.panel-default
-        .panel-heading
-        .panel-heading
-          %h4.pull-left Analytics
-          %a{class: "btn btn-default pull-right", href: "#"}
-            %span.glyphicon.glyphicon-pencil
-            Edit Analytics
-          .clear
         .panel-body
           %table.table
             %thead

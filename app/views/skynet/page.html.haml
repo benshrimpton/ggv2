@@ -1,0 +1,29 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-book
+        #{@page.page_title}
+    .col-sm-6.text-right
+      %a.btn.btn-default{href: "/skynet/pages/"} Back To Pages
+      %a.btn.btn-default.btn-primary{href: ""} Save Page
+
+  .row
+    .panel.panel-default
+      .panel-heading
+        %h4.pull-left= @page.page_title
+        %span.pull-right
+          Last Updated
+          %span.badge #{@page.updated_at}
+        .clear
+      .panel-body 
+        .form-group
+          %label Page Title
+          %input{type: "text", value: @page.page_title, class: "form-control"}
+        .form-group
+          %label Page Url
+          %input{type: "text", value: @page.url_key, class: "form-control"}
+        .form-group
+          %label Page Url
+          %textarea{class: "form-control", style:"min-height: 300px"}
+            = @page.page_content
