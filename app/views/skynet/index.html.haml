@@ -13,9 +13,16 @@
         .panel-heading
           %h5 Your Site
         .panel-body
-          .next-card__section.next-card__section--no-padding.next-card__section--bordered.devices
-            .macbook
-              .store-preview-mask
+          .row
+            .col-sm-8
+              .macbook
+                .store-preview-mask
+            .col-sm-4
+              .panel.panel-default
+                .panel-heading
+                  Latest Sales
+                .panel-body
+                  data      
 
     .col-sm-4
       .panel
@@ -41,9 +48,9 @@
           %table.table.table-striped
             %thead
               %th
-                %h4 Best Selling Products
+                %h4 Top Products
               %th
-                SKU
+                %a{href:""}View Report
             %tbody#product-list
               - @products.take(5).each do |p|
                 %tr

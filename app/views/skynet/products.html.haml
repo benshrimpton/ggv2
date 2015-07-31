@@ -4,22 +4,26 @@
       %h4.pull-left
         %span.glyphicon.glyphicon-tag
         Products
-    .col-sm-6.text-right
-      %input#product-list-filter.form-control{placeholder: "Filter Products"}
+    .col-sm-6
+      
 
   .row
     .panel.panel-default
+      .panel-heading
+        %h5 Magento Products by Store
       .panel-body
-        .pull-left
-          .div
-            %label Choose Store
-          .btn-group{"aria-label" => "...", :role => "group"}
-            %button.btn.btn-default{:type => "button"} UK
-            %button.btn.btn-default{:type => "button"} USA
-            %button.btn.btn-default{:type => "button"} JP
-            %button.btn.btn-default{:type => "button"} HK
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#home", :role => "tab"}  UK
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#profile", :role => "tab"} USA
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#messages", :role => "tab"} JAPAN
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "settings", "data-toggle" => "tab", :href => "#settings", :role => "tab"} HONG KONG
 
-        .pull-right= paginate @products  
+        .pull-left= paginate @products 
+        %input#product-list-filter.form-control.pull-right{placeholder: "Filter Products", style:"max-width: 300px"} 
         %table.table.table-striped
           %thead
             %th

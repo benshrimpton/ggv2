@@ -193,6 +193,13 @@ tr.inactive {
 }
 .thumbs {
   img {
-    margin: 0 5px 5px 0;
+    margin: 0 10px 10px 0;
   }
+}
+.thumbnail {
+  margin: 0 10px 10px 0;
+    border: solid 10px white; 
+}
+.thumbnail.selected {
+  border-color: silver;
 }

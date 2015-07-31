@@ -1,8 +1,18 @@
 var ready;
 ready = function() {
 
-  console.log("your dom is ready")
-  
+  console.log("your dom is ready");
+
+  // lookbook gallery thumbs
+  $('#gallery-thumbs img:first-of-type').addClass('selected');
+  $('#gallery-thumbs img').on('mousedown', function(){
+   $('#gallery-thumbs img').removeClass('selected');
+   $(this).addClass('selected');
+   var src = $(this).attr('src');
+   $('.featured-image').attr('src', src);
+  });
+
+
   $('.lookbook-video').fitVids();
   $('#product-list-filter').fastLiveFilter('.product-list');
   $( "#sortable, .sortable" ).sortable();

@@ -9,21 +9,42 @@
       %a.btn.btn-default.btn-primary{href: ""} Save Page
 
   .row
-    .panel.panel-default
-      .panel-heading
-        %h4.pull-left= @page.page_title
-        %span.pull-right
-          Last Updated
-          %span.badge #{@page.updated_at}
-        .clear
-      .panel-body 
-        .form-group
-          %label Page Title
-          %input{type: "text", value: @page.page_title, class: "form-control"}
-        .form-group
-          %label Page Url
-          %input{type: "text", value: @page.url_key, class: "form-control"}
-        .form-group
-          %label Page Url
-          %textarea{class: "form-control", style:"min-height: 300px"}
-            = @page.page_content
+    .col-sm-8
+      .panel.panel-default
+        .panel-heading
+          %h4.pull-left= @page.page_title
+          %span.pull-right
+            Last Updated
+            %span.badge #{@page.updated_at}
+          .clear
+        .panel-body
+          .col-sm-6
+            .form-group
+              %label Page Title
+              %input{type: "text", value: @page.page_title, class: "form-control"}
+          .col-sm-6
+            .form-group
+              %label Page Url
+              %input{type: "text", value: @page.url_key, class: "form-control"}
+          .col-sm-12    
+            .form-group
+              %label Page Content
+              %textarea{class: "form-control", style:"min-height: 300px"}
+                = @page.page_content
+
+    .col-sm-4
+      .panel.panel-default
+        .panel-heading
+          Page Media
+        .panel-body
+          .form-group
+            %label Video ID (eg: YVUrB-3l0eE )
+            %input#video-id{type: "text", value: "By7KvP3UksU", class: "form-control"}
+          .form-group
+            .lookbook-video
+              %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/By7KvP3UksU", :width => "560"}           
+          .form-group
+            %label Featured Image
+            #sortable
+              %img.img-responsive{ src: "https://www.jeffreyrudes.com/system/homepage_images/image_desktops/000/000/002/large/jr-collections.jpg" , class: "img-responsive"}
+

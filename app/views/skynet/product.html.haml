@@ -1,17 +1,17 @@
 .container-fluid
   .row.page-header
-    .col-sm-6
+    .col-sm-8
       %h4.pull-left
         %span.glyphicon.glyphicon-tag
-        #{@product.name}
-    .col-sm-6.text-right
+        = truncate(@product.name, omision: "...", length: 50)
+    .col-sm-4.text-right
       %a.btn.btn-default.btn-primary{href: ""} Save Product 
 
   .row
-    .col-sm-9
+    .col-sm-8
       .panel.panel-default
         .panel-heading
-          %h5.pull-left= @product.name
+          %h6.pull-left= @product.name
           %span.pull-right
             %span Stock Level
             %span.badge 12
@@ -51,12 +51,7 @@
                 %label Description
                 %textarea{ value: @product.description, class: "form-control"}
                   = @product.description
-              .form-group
-                %label Related Products
-                #sortable
-                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
-                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
-                  %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+
               
               - if @product.magento_type = "configurable"
                 .form-group
@@ -64,11 +59,25 @@
                   = @product.simple_products.each do |s|
                     .col-sm-4
                       %h5= s.name
-    .col-sm-3 
+
+
+    .col-sm-4 
       .panel.panel-default
         .panel-heading
-          right Col
+          Product Media
         .panel-body
-          %p Some content here            
-
-
+          .form-group
+            %label Video ID (eg: YVUrB-3l0eE )
+            %input#video-id{type: "text", value: "By7KvP3UksU", class: "form-control"}
+          .form-group
+            .lookbook-video
+              %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/By7KvP3UksU", :width => "560"}           
+          .form-group
+            %label Related Products
+            %input#video-id{type: "text", value: "Search", class: "form-control"}
+          .form-group
+            %label Related Products
+            #sortable
+              %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+              %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 
+              %img.thumbnail.pull-left{ src: "https://www.jeffreyrudes.com//system/gemgento/asset_files/files/000/000/463/medium/352JJR2FWO14_010_2015_05_11_JEFFREYRUDES_ECOMMERCE_JACKET_11_1_010.jpg" , class: "img-responsive", width: "90"} 

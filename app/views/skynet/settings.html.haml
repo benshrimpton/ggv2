@@ -27,17 +27,28 @@
                 %td
                   %label Facebook UrL
                 %td
-                  %input{type:"text", value: @setting.facebook_url, class: "form-control"}
+                  - if @setting.facebook_url?
+                    %input{type:"text", value: @setting.facebook_url, class: "form-control"}
               %tr
                 %td
                   %label Twitter Url 
                 %td
-                  %input{type:"text", value: @setting.twitter_url, class: "form-control"}
+                  - if @setting.twitter_url
+                    %input{type:"text", value: @setting.twitter_url, class: "form-control"}
               %tr
                 %td
                   %label Instagram Url
                 %td
-                  %input{type:"text", value: @setting.instagram_url, class: "form-control"}
+                  - if @setting.instagram_url
+                    %input{type:"text", value: @setting.instagram_url, class: "form-control"}
+              %tr
+                %td
+                  %label Pinterest Url
+                %td
+                  - if @setting.pinterest_url
+                    %input{type:"text", value: @setting.pinterest_url, class: "form-control"}
+
+
   .row
     .col-sm-3
       %h4 Analytics
