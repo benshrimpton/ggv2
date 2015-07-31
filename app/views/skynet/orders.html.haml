@@ -1,0 +1,72 @@
+.container-fluid
+  .row.page-header
+    .col-sm-6
+      %h4.pull-left
+        %span.glyphicon.glyphicon-folder-open
+        Categories
+    .col-sm-6.text-right
+      %input#product-list-filter.form-control{placeholder: "Filter Orders"}
+
+  .row
+    .panel.panel-default
+      .panel-heading
+        %h5 Magento Orders
+      .panel-body
+        / Nav tabs
+        %ul.nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"aria-controls" => "home", "data-toggle" => "tab", :href => "#home", :role => "tab"}  UK
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "profile", "data-toggle" => "tab", :href => "#profile", :role => "tab"} USA
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "messages", "data-toggle" => "tab", :href => "#messages", :role => "tab"} JAPAN
+          %li{:role => "presentation"}
+            %a{"aria-controls" => "settings", "data-toggle" => "tab", :href => "#settings", :role => "tab"} HONG KONG
+        / Tab panes
+        .tab-content
+          #home.tab-pane.active{:role => "tabpanel"}
+            %table.table.table-striped
+              %thead
+                %th
+                  ID
+                %th
+                  Store
+                %th
+                  Staus 
+                %th.text-center
+                  Total  
+                %th
+                  Email
+                %th
+                  View             
+              %tbody#product-list
+                - @orders.each do |o|
+                  %tr
+                    %td
+                      %a.sort-category{href: "/skynet/ordery/#{o.id}"}
+                        - if o.email_sent == true
+                          %span.label.label-info= o.magento_id
+                        - else
+                          %span.label.label-danger= o.magento_id                     
+                    %td
+                      %small= o.store_name
+                    %td
+                      - if o.email_sent == true
+                        %span.label.label-info Email Sent
+                      - else
+                        %span.label.label-danger Not Sent  
+                    %td.text-center
+                      = o.grand_total 
+                    %td
+                      %a{href:"mailto:#{o.customer_email}"}= o.customer_email
+                    %td
+                      %a.sort-category{href: "/skynet/order/#{o.id}"}
+                        %span.glyphicon.glyphicon-refresh
+                        View order  
+    
+
+
+ 
+
+
+

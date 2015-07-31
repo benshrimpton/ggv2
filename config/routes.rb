@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   get 'skynet/settings', to: 'skynet#settings'
   get 'skynet/pages', to: 'skynet#pages'
   get 'skynet/page/:id', to: 'skynet#page'
-
+  get 'skynet/orders/', to: 'skynet#orders'
   # Gift Cards
   namespace :user do
     resources :gift_cards, only: [:index, :create]

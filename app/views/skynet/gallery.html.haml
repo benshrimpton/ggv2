@@ -16,7 +16,7 @@
             %span.glyphicon.glyphicon-picture
             Gallery Images
           %span.pull-right
-            %a.btn.btn-default.btn-primary{href: ""} Edit Gallery
+            %a.btn.btn-default.btn-primary{href: ""} Upload Images
           .clear
         .panel-body.sortable#gallery-thumbs
           %img.thumbnail.pull-left{src: "https://www.jeffreyrudes.com/system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg?1436287376", width: "120"}
@@ -47,9 +47,11 @@
       .panel.panel-default
         .panel-heading
           Image
+          %input.btn.btn-default.pull-right{:onclick => "return launchEditor('image1');", :type => "submit", :value => "Edit photo"}
+          .clear
         .panel-body
 
-          %img.thumbnail.img-responsive.featured-image{src: "https://www.jeffreyrudes.com//system/lookbook_images/lookbook_images/000/000/003/large/LB-1.jpg"}
+          %img.thumbnail.img-responsive.featured-image#image1{src: "/assets/aviary.jpg"}
 
           .form-group
             %label Title
@@ -58,3 +60,26 @@
             %label Description
             %input.form-control{type: "text", value: "Image Title"}
 
+:javascript
+  var featherEditor = new Aviary.Feather({
+      apiKey: 'your-key-here',
+      apiVersion: 3,
+      theme: 'dark', // Check out our new 'light' and 'dark' themes!
+      tools: 'all',
+      appendTo: '',
+      onSave: function(imageID, newURL) {
+          var img = document.getElementById(imageID);
+          img.src = newURL;
+      },
+      onError: function(errorObj) {
+          alert(errorObj.message);
+      }
+  });
+
+  function launchEditor(id, src) {
+      featherEditor.launch({
+          image: id,
+          url: src
+      });
+      return false;
+  }

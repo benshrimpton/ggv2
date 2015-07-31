@@ -1,7 +1,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: jeffreyrudes_development
+  database: jr_clone
   username: root
   password: ""
   host: localhost

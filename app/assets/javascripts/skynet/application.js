@@ -18,6 +18,7 @@
 //= require jquery.unveil
 //= require jquery.fitvids
 //= require skynet/jquery.fastLiveFilter
+//= require skynet/feather
 //= require turbolinks
 
 

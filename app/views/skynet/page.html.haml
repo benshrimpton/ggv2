@@ -25,7 +25,7 @@
           .col-sm-6
             .form-group
               %label Page Url
-              %input{type: "text", value: @page.url_key, class: "form-control"}
+              %input{type: "text", value: @page.url_key, class: "form-control", disbaled:"disbaled"}
           .col-sm-12    
             .form-group
               %label Page Content
@@ -44,7 +44,9 @@
             .lookbook-video
               %iframe{:allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/By7KvP3UksU", :width => "560"}           
           .form-group
-            %label Featured Image
+            %label.pull-left Featured Image
+            %a.btn.btn-default.pull-right{href: "#"} Update Image
+            .clear
             #sortable
-              %img.img-responsive{ src: "https://www.jeffreyrudes.com/system/homepage_images/image_desktops/000/000/002/large/jr-collections.jpg" , class: "img-responsive"}
+              %img.img-responsive{ src: "/assets/featured.jpg" , class: "img-responsive"}
 

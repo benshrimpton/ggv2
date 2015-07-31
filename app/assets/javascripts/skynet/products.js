@@ -1,7 +1,28 @@
 var ready;
 ready = function() {
 
-  console.log("your dom is ready");
+//aviary feather editor
+   var featherEditor = new Aviary.Feather({
+       apiKey: 'your-key-here',
+       apiVersion: 3,
+       theme: 'dark', // Check out our new 'light' and 'dark' themes!
+       tools: 'all',
+       appendTo: '',
+       onSave: function(imageID, newURL) {
+           var img = document.getElementById(imageID);
+           img.src = newURL;
+       },
+       onError: function(errorObj) {
+           alert(errorObj.message);
+       }
+   });
+   function launchEditor(id, src) {
+       featherEditor.launch({
+           image: id,
+           url: src
+       });
+      return false;
+   }
 
   // lookbook gallery thumbs
   $('#gallery-thumbs img:first-of-type').addClass('selected');

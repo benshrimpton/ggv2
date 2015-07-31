@@ -17,7 +17,10 @@ class SkynetController < ApplicationController
   def product
     @product = Gemgento::Product.find(params[:id])
   end
-
+  def orders
+    @orders = Gemgento::Order.all
+    #render 'skynet/settings'
+  end 
   def settings
     @setting = Setting.first
     #render 'skynet/settings'
